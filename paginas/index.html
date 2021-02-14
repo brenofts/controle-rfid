@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OGCOT - Controle de TPs</title>
+</head>
+
+<body>
+    <div id="conectando">Conectando...</div>
+    <div id="principal">
+        <div class="tela" id="inicio">
+            <h1>Início</h1>
+            <form autocomplete="off">
+                <fieldset>
+                    <legend>Tag</legend>
+                    <label><input type="text" name="tag" id="tag" size="10" maxlength="8"></label>
+                </fieldset>
+            </form>
+        </div>
+        <div class="tela" id="retirar"></div>
+        <div class="tela" id="devolver"></div>
+        <div class="tela" id="registros"></div>
+        <div class="tela" id="busca"></div>
+        <div class="tela" id="cadastro"></div>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyC8TiMd5XwUNNyQEW1ljosXtXyItdaPtis",
+            authDomain: "controle-rfid-web.firebaseapp.com",
+            projectId: "controle-rfid-web",
+            storageBucket: "controle-rfid-web.appspot.com"
+        }
+
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database()
+    </script>
+    <script src="../scripts/classes.js"></script>
+    <script src="../scripts/inicio.js"></script>
+    <script src="../scripts/retirar.js"></script>
+    <script src="../scripts/devolver.js"></script>
+    <script src="../scripts/busca.js"></script>
+    <script src="../scripts/registros.js"></script>
+</body>
+
+</html>
