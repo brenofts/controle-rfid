@@ -1,53 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css" />
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>OGCOT - Controle de TPs</title>
+    </head>
 
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OGCOT - Controle de TPs</title>
-</head>
-
-<body>
-    <div id="conectando">Conectando...</div>
-    <div id="principal">
-        <div class="tela" id="inicio">
-            <h1>Início</h1>
-            <form autocomplete="off">
-                <fieldset>
-                    <legend>Tag</legend>
-                    <label><input type="text" name="tag" id="tag" size="10" maxlength="8"></label>
-                </fieldset>
-            </form>
+    <body>
+        <div id="conectando">Conectando...</div>
+        <div id="principal">
+            <div class="pagina" id="inicio">
+                <h1>Início</h1>
+                <form autocomplete="off" id="formulario1">
+                    <fieldset>
+                        <legend>Tag TP</legend>
+                        <label
+                            ><input
+                                type="password"
+                                name="tag"
+                                id="tagTP"
+                                size="10"
+                                maxlength="8"
+                                title="Leitura RFID"
+                        /></label>
+                    </fieldset>
+                </form>
+                <br /><br />
+                <button
+                    id="maisOpc"
+                    title="Buscas, Cadastro, Retirar, Devolver..."
+                >
+                    Mais opções
+                </button>
+            </div>
+            <div class="pagina" id="retirar">
+                <h1>Retirar</h1>
+                <div id="numTPRetirar"></div>
+                <form autocomplete="off" id="formulario2">
+                    <fieldset>
+                        <legend>Tag Usuário</legend>
+                        <label
+                            ><input
+                                type="password"
+                                name="tag"
+                                id="tagUsuario"
+                                size="10"
+                                maxlength="8"
+                        /></label>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="pagina" id="devolver">
+                <h1>Devolver</h1>
+                <div id="numTPDevolver"></div>
+                <div id="idTPDevolver"></div>
+                <form autocomplete="off" id="formulario3">
+                    <fieldset>
+                        <legend>Tag Gerente</legend>
+                        <label
+                            ><input
+                                type="password"
+                                name="tag"
+                                id="tagGerente"
+                                size="10"
+                                maxlength="8"
+                        /></label>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="pagina" id="opcoes">
+                <button id="btnControle">Controle</button>
+                <button id="btnBusca">Busca</button>
+                <button id="btnRetirar">Retirar</button>
+                <button id="btnDevolver">Devolver</button>
+                <button id="btnTransporte">Transporte</button>
+                <button id="btnCadastro">Cadastro</button>
+                <button id="btnVoltar">Voltar</button>
+            </div>
+            <div class="pagina" id="transporte">
+                <h1>Transporte</h1>
+            </div>
+            <div class="pagina" id="controle">
+                <h1>Registros</h1>
+                <div id="processando"></div>
+                <table id="tabelaControle">
+                    <caption id="updateTime"></caption>
+                    <tr>
+                        <th>TP</th>
+                        <th>Status</th>
+                        <th>Dias</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Piloto</th>
+                        <th>Gerente</th>
+                        <th>Posto</th>
+                    </tr>
+                    <tbody id="bodyControle"></tbody>
+                </table>
+            </div>
+            <div class="pagina" id="busca">
+                <h1>Busca</h1>
+                <div style="display: inline">
+                    <button id="btnBuscaMatr">Matrícula</button>
+                    <button id="btnBuscaData">Data</button>
+                    <button id="btnBuscaTP">TP</button>
+                    <button id="btnBuscaPosto">Posto</button>
+                    <button id="btnBuscaGerente">Gerente</button>
+                </div>
+                <div class="pagina" id="buscaMatr">
+                    <form autocomplete="off" id="formBuscaMatr">
+                        <input
+                            type="text"
+                            name="matricula"
+                            id="inputMatrBuscar"
+                        />
+                        <input
+                            type="submit"
+                            value="Buscar"
+                            id="btnBuscarMatr"
+                        />
+                    </form>
+                </div>
+                <div class="pagina" id="buscaData">
+                    <form autocomplete="off" id="formBuscaData">
+                        <input id="inputDataBuscar" type="date">
+                        <input type="submit" id="btnBuscarData" value="Buscar">
+                    </form>
+                </div>
+                <div id="buscaTP"></div>
+            </div>
+            <div class="pagina" id="tabela">
+                <table>
+                    <caption id="tituloTabela"></caption>
+                    <tr>
+                        <th>TP</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Piloto</th>
+                        <th>Gerente</th>
+                        <th>Posto</th>
+                    </tr>
+                    <tbody id="bodyTabela"></tbody>
+                </table>
+            </div>
+            <div class="pagina" id="cadastro">
+                <h1>Cadastro</h1>
+            </div>
         </div>
-        <div class="tela" id="retirar"></div>
-        <div class="tela" id="devolver"></div>
-        <div class="tela" id="registros"></div>
-        <div class="tela" id="busca"></div>
-        <div class="tela" id="cadastro"></div>
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
 
-    </div>
-    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyC8TiMd5XwUNNyQEW1ljosXtXyItdaPtis",
-            authDomain: "controle-rfid-web.firebaseapp.com",
-            projectId: "controle-rfid-web",
-            storageBucket: "controle-rfid-web.appspot.com"
-        }
+        <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyB1rkLkF8gQsQNaiXdBt6zzpy2fYSm-64I",
+                authDomain: "controle-tp-web.firebaseapp.com",
+                databaseURL: "https://controle-tp-web.firebaseio.com",
+                projectId: "controle-tp-web",
+                storageBucket: "controle-tp-web.appspot.com",
+            }
 
-        firebase.initializeApp(firebaseConfig);
+            firebase.initializeApp(firebaseConfig)
 
-        const db = firebase.database()
-    </script>
-    <script src="../scripts/classes.js"></script>
-    <script src="../scripts/inicio.js"></script>
-    <script src="../scripts/retirar.js"></script>
-    <script src="../scripts/devolver.js"></script>
-    <script src="../scripts/busca.js"></script>
-    <script src="../scripts/registros.js"></script>
-</body>
-
+            const db = firebase.database()
+        </script>
+        <script src="../scripts/script.js"></script>
+        <script src="../scripts/inicio.js"></script>
+        <script src="../scripts/retirar.js"></script>
+        <script src="../scripts/devolver.js"></script>
+        <script src="../scripts/busca.js"></script>
+        <script src="../scripts/buscaMatr.js"></script>
+        <script src="../scripts/controle.js"></script>
+    </body>
 </html>

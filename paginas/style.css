@@ -4,12 +4,18 @@ body {
     margin-left: 30px;
 }
 
-#principal {
+.pagina {
     display: none;
+    flex-direction: column;
+    width: fit-content;
 }
 
 #conectando {
     display: block;
 }
 
+fieldset {
+    border-radius: 5px;
+    border: lightgray solid 1px;
+}
 
