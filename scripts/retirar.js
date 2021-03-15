@@ -1,5 +1,5 @@
 
-inputTagUsuario.addEventListener("input", (e) => {
+inputTagUsuario.addEventListener("input", () => {
     tagUsuario = inputTagUsuario.value
     if (tagUsuario.length == 8) {      
       db.ref("usuarios")
@@ -15,7 +15,7 @@ inputTagUsuario.addEventListener("input", (e) => {
           livre = usuarioEncontrado.livre
           tpEmUso = usuarioEncontrado.tp
           if (livre == true){
-            retirar(id, matricula, tp, posto)
+            verificarFusoRetirar()
           } else {
             if (livre == false) {
               alert('Consta TP ' + tpEmUso + ' em nome de ' + id)
@@ -30,9 +30,21 @@ inputTagUsuario.addEventListener("input", (e) => {
     }
 })
 
+verificarFuso().then(() => {
+  if (fusoOk == true) {
+    retirar()
+  }
+})
 
+function verificarFusoRetirar() {
+  if (new Date().getTimezoneOffset() == 180) {
+    retirar(id, matricula, tp, posto)
+  } else {
+    alert('Verificar configuração de fuso horário deste computador.')
+    document.location.reload()
+  }
+}
 
-var diferencaHora
 
 function retirar(i, m, t, p) {
     db.ref('.info/serverTimeOffset').on('value', snap => {

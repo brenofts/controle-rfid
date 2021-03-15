@@ -33,9 +33,9 @@ btnBuscaData.addEventListener('click', () => {
 
 formBuscaData.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (formBuscaData.value != "") {
-        console.log(formBuscaData.valueAsNumber);
+    if (inputDataBuscar.value != "") {
+        buscarData(inputDataBuscar.valueAsNumber)
       } else {
-        alert("Selecione a data");
+        alert("Selecione a data")
       }
 })

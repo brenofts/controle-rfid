@@ -72,10 +72,10 @@ function buscarPosto(posto) {
 // IMPRIMIR
 // criar um <div id="imprimir"> com as informaçoes da variavel conteudoBusca
 // em formato de tabela simples
-// passar a id dessa div como parametro ao chamar a função imprimir()
+// passar a id dessa div como parametro ao chamar a função imprimir() 
 
 function imprimir(tabela) {
-    var mywindow = window.open('', 'PRINT', '');
+    var mywindow = window.open('', Math.random(), '');
   
       mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css"><title>' + document.title  + '</title>');
       mywindow.document.write('</head><body >');

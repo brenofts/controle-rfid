@@ -1,3 +1,6 @@
+firebase.auth().signInAnonymously().then(user => {
+  console.log('o pai tá on', user);
+}).catch(error => alert(error.message));
 //funções que alteram a exibição (css-display) dos elementos 
 function show(x) {
   x.style.display = 'flex'
@@ -41,6 +44,7 @@ const btnVoltar = document.getElementById('btnVoltar')
 const btnControle = document.getElementById('btnControle')
 const btnBusca = document.getElementById('btnBusca')
 const btnBuscaMatr = document.getElementById('btnBuscaMatr')
+const btnBuscaData = document.getElementById('btnBuscaData')
 const btnBuscarMatr = document.getElementById('btnBuscarMatr')
 const btnBuscarData = document.getElementById('btnBuscarData')
 
@@ -68,6 +72,7 @@ var tagUsuario
 var tagGerente
 var livre
 var tpEmUso
+var diferencaHora
 
 
 //anulando o submit
@@ -76,11 +81,15 @@ document.getElementById("formulario2").addEventListener("submit", (e) => e.preve
 document.getElementById("formulario3").addEventListener("submit", (e) => e.preventDefault())
 
 
+function ajustarHora() {
+  // ao chamar a função ajustarHora() será retornado o valor da diferença caso o fuso esteja correto
+  if (new Date().getTimezoneOffset() == 180) {
+    db.ref('.info/serverTimeOffset').once('value', snap => {
+      diferencaHora = snap.val()
+      return diferencaHora
+    })
+  } else {
 
+  }
 
-
-
-
-firebase.auth().signInAnonymously().then(user => {
-  console.log('o pai tá on', user);
-}).catch(error => alert(error.message));
+}

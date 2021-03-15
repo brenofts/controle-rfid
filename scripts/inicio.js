@@ -72,10 +72,7 @@ function verificarStatus() {
 // })
 
 btnVoltar.addEventListener('click', () => {
-    hide(pOpcoes)
-    hide(pBusca)
-    hide(pControle)
-    show(pInicio)
+    document.location.reload()
 })
 
 btnBusca.addEventListener('click', () => {
