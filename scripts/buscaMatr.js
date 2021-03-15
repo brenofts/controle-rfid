@@ -4,10 +4,11 @@ function buscarMatr(matricula) {
 	db.ref('historico')
 		.once('value')
 		.then(snapshot => {
-			var data = Object.values(snapshot.val())
+			var resultado = Object.values(snapshot.val())
 			function gerarTabela(valores) {
-				tituloTabela.innerHTML = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date().toLocaleString()
-				for (var i = 0; i < valores.length; i++) {
+				tituloTabela.innerHTML = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString()
+				conteudoBusca[0] = tituloTabela.innerHTML
+                for (var i = 0; i < valores.length; i++) {
 					if (matricula == valores[i].matricula) {
 						var item = `<tr>
 							<td><strong>${valores[i].tp}</strong></td>
@@ -20,14 +21,14 @@ function buscarMatr(matricula) {
 					  </tr>`
 						bodyTabela.innerHTML += item
 						resultadoBusca++
-						conteudoBusca[i] = valores[i]
+						conteudoBusca[i + 1] = valores[i]
 					}
 					console.log(resultadoBusca)
 				}
 				return resultadoZero(resultadoBusca)
 			}
-			gerarTabela(data.reverse())
-		})
+			gerarTabela(resultado.reverse())
+		}).catch(e => console.log(e.message))
 }
 
 btnBuscaMatr.addEventListener('click', () => {
@@ -38,7 +39,8 @@ btnBuscaMatr.addEventListener('click', () => {
 formBuscaMatr.addEventListener('submit', e => {
 	e.preventDefault()
 	if (inputMatrBuscar.value.length >= 4 && inputMatrBuscar.value.length < 6) {
-		buscarMatr(inputMatrBuscar.value)
+		ajustarHora()
+        buscarMatr(inputMatrBuscar.value)
 	} else {
 		alert('Preencha corretamente')
 	}

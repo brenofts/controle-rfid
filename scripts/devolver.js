@@ -14,7 +14,8 @@ inputTagGerente.addEventListener('input', () => {
 				gerente = usuarioEncontrado.id
 				var ehGerente = usuarioEncontrado.gerente
 				if (ehGerente == true) {
-					verificarFusoDevolver()
+					ajustarHora()
+					devolver(id, matricula, tp, posto, gerente)
 				} else {
 					if (ehGerente == false) {
 						alert('Operação autorizada somente para gerentes')
@@ -23,25 +24,33 @@ inputTagGerente.addEventListener('input', () => {
 				}
 			})
 			.catch(error => {
-				alert('TAG não cadastrada')
+				if (error.message.includes('contains NaN')) {
+					alert('Não foi possível realizar o registro de devolução.')
+					document.location.reload()
+				} else {
+					if (error.message.includes('Cannot read property')) {
+						alert('TAG não cadastrada')
+						document.location.reload()
+					} else {
+						alert('Algo deu errado: ' + error.message)
+						document.location.reload()
+					}
+				}
 				console.log(error.message)
 			})
 	}
 })
 
-function verificarFusoDevolver() {
-	if (new Date().getTimezoneOffset() == 180) {
-		devolver(id, matricula, tp, posto, gerente)
-	} else {
-		alert('Verificar configuração de fuso horário deste computador.')
-		document.location.reload()
-	}
-}
+// function verificarFusoDevolver() {
+// 	if (new Date().getTimezoneOffset() == 180) {
+// 		devolver(id, matricula, tp, posto, gerente)
+// 	} else {
+// 		alert('Verificar configuração de fuso horário deste computador.')
+// 		document.location.reload()
+// 	}
+// }
 
 function devolver(i, m, t, p, g) {
-	db.ref('.info/serverTimeOffset').on('value', snap => {
-		diferencaHora = snap.val()
-	})
 	var registro = {
 		status: 'Devolvido',
 		id: i,

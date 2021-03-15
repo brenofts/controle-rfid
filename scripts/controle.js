@@ -2,6 +2,7 @@ maisOpc.addEventListener('click', () => {
     hide(pInicio)
     showInline(pOpcoes)
     show(pControle)
+    ajustarHora()
     controle()
 })
 
@@ -19,7 +20,7 @@ const controle = () => {
         // cria função gerarTabela que lê os valores e retorna para cada valor uma linha na tabela
         // de acordo com as condições
         function gerarTabela(valores) {
-            updateTime.innerHTML = "Atualizado em " + new Date().toLocaleString()
+            updateTime.innerHTML = "Atualizado em " + new Date(new Date().getTime() + diferencaHora).toLocaleString()
             // "zera" os dados na tabela antes de inserir novos
             bodyControle.innerHTML = ""
             // método de array for

@@ -82,14 +82,12 @@ document.getElementById("formulario3").addEventListener("submit", (e) => e.preve
 
 
 function ajustarHora() {
-  // ao chamar a função ajustarHora() será retornado o valor da diferença caso o fuso esteja correto
   if (new Date().getTimezoneOffset() == 180) {
     db.ref('.info/serverTimeOffset').once('value', snap => {
       diferencaHora = snap.val()
-      return diferencaHora
     })
   } else {
-
+    alert('Verificar configuração de fuso horário deste computador.')
+    document.location.reload()
   }
-
 }

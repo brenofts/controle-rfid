@@ -11,11 +11,15 @@ function resultadoZero(x) {
         if (x == 1) {
             alert("Foi encontrado 1 resultado")
             imprimir('tabela')
-            document.location.reload()
+            setTimeout(() => {
+                document.location.reload()
+            }, 1000)
         } else {
             alert("Foram encontrados " + x + " resultados")
             imprimir('tabela')
-            document.location.reload()
+            setTimeout(() => {
+                document.location.reload()
+            }, 1000)
         }
         resultadoBusca = 0
     }

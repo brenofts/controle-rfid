@@ -15,7 +15,8 @@ inputTagUsuario.addEventListener("input", () => {
           livre = usuarioEncontrado.livre
           tpEmUso = usuarioEncontrado.tp
           if (livre == true){
-            verificarFusoRetirar()
+            ajustarHora()
+            retirar(id, matricula, tp, posto)
           } else {
             if (livre == false) {
               alert('Consta TP ' + tpEmUso + ' em nome de ' + id)
@@ -23,33 +24,34 @@ inputTagUsuario.addEventListener("input", () => {
             }
           }
       }).catch(error => {
-        alert('TAG não cadastrada')
+        if (error.message.includes('contains NaN')) {
+          alert('Não foi possível realizar o registro de retirada.')
+          document.location.reload()
+        } else {
+          if (error.message.includes('Cannot read property')){
+            alert('TAG não cadastrada')
+            document.location.reload()
+          } else {
+            alert('Algo deu errado: ' + error.message)
+            document.location.reload()
+          }
+        }
         console.log(error.message)
-        document.location.reload()
       })
     }
 })
 
-verificarFuso().then(() => {
-  if (fusoOk == true) {
-    retirar()
-  }
-})
-
-function verificarFusoRetirar() {
-  if (new Date().getTimezoneOffset() == 180) {
-    retirar(id, matricula, tp, posto)
-  } else {
-    alert('Verificar configuração de fuso horário deste computador.')
-    document.location.reload()
-  }
-}
+// function verificarFusoRetirar() {
+//   if (new Date().getTimezoneOffset() == 180) {
+//     retirar(id, matricula, tp, posto)
+//   } else {
+//     alert('Verificar configuração de fuso horário deste computador.')
+//     document.location.reload()
+//   }
+// }
 
 
 function retirar(i, m, t, p) {
-    db.ref('.info/serverTimeOffset').on('value', snap => {
-      diferencaHora = snap.val()
-    })
     // o valor que será atualizado
     var registro = {
         status: "Em uso",
