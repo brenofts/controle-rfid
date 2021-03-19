@@ -9,7 +9,17 @@
     </head>
 
     <body>
-        <div id="conectando">Conectando...</div>
+        <h1 id="nomePosto">OGCOT</h1>
+        <div class='hidden' id="conectando">Conectando...</div>
+        <div class='hidden' id="selecaoPosto">
+            <h2>Selecione o posto</h2>
+            <select name="Selecione o posto" id="selectPosto">
+                <option value="T-PAC">T-PAC</option>
+                <option value="T-PAS">T-PAS</option>
+                <option value="FILA-CLA">FILA-CLA</option>
+            </select>
+            <button id="btnSelecionarPosto">Selecionar</button>
+        </div>
         <div id="principal">
             <div class="pagina" id="inicio">
                 <h1>Início</h1>
@@ -70,7 +80,7 @@
                     </fieldset>
                 </form>
             </div>
-            <div class="pagina" id="opcoes">
+            <div id="opcoes">
                 <button id="btnControle">Controle</button>
                 <button id="btnBusca">Busca</button>
                 <button id="btnRetirar">Retirar</button>

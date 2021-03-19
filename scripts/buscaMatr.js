@@ -6,7 +6,7 @@ function buscarMatr(matricula) {
 		.then(snapshot => {
 			var resultado = Object.values(snapshot.val())
 			function gerarTabela(valores) {
-				tituloTabela.innerHTML = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString()
+				tituloTabela.innerHTML = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + posto
 				conteudoBusca[0] = tituloTabela.innerHTML
                 for (var i = 0; i < valores.length; i++) {
 					if (matricula == valores[i].matricula) {
@@ -40,7 +40,11 @@ formBuscaMatr.addEventListener('submit', e => {
 	e.preventDefault()
 	if (inputMatrBuscar.value.length >= 4 && inputMatrBuscar.value.length < 6) {
 		ajustarHora()
-        buscarMatr(inputMatrBuscar.value)
+		.then(() => buscarMatr(inputMatrBuscar.value))
+		.catch(e => {
+			alert(e)
+			document.location.reload()
+		})
 	} else {
 		alert('Preencha corretamente')
 	}

@@ -15,7 +15,11 @@ inputTagGerente.addEventListener('input', () => {
 				var ehGerente = usuarioEncontrado.gerente
 				if (ehGerente == true) {
 					ajustarHora()
-					devolver(id, matricula, tp, posto, gerente)
+						.then(() => devolver(id, matricula, tp, posto, gerente))
+						.catch(e => {
+							alert(e)
+							document.location.reload()
+						})
 				} else {
 					if (ehGerente == false) {
 						alert('Operação autorizada somente para gerentes')
@@ -61,6 +65,7 @@ function devolver(i, m, t, p, g) {
 		data: new Date().getTime() + diferencaHora,
 	}
 
+	chave = db.ref().child('historico').push().key
 	// cria uma variável vazia do tipo objeto
 	var updates = {}
 	// cria um item nesse objeto updates[item] = "valor do item"
@@ -70,20 +75,26 @@ function devolver(i, m, t, p, g) {
 	//  /usuarios/id/livre : true
 	// }
 	updates['/tps/' + t + '/status/'] = registro
+	updates['/historico/' + chave] = registro
 	// bloqueia ou libera o usuario
 
 	updates['/usuarios/' + i.replace('.', '_') + '/livre/'] = true
 	updates['/usuarios/' + i.replace('.', '_') + '/tp/'] = '-'
-	var mensagem = t + ' devolvido por ' + i + ' para ' + g + ' com sucesso'
+	msgAlert = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + ', ' + new Date(registro.data).toLocaleString() + ' ' + chave
+	mensagem = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
+	email = i + '@metro.df.gov.br,' + g + '@metro.df.gov.br'
+	fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
 
 	// retorna chamando o firebase para escrever as atualizacoes
 	return firebase
 		.database()
 		.ref()
 		.update(updates)
-		.then(db.ref('historico').push().set(registro))
+		.then(fetch(encodeURI(fetchUrl), header).then((response) => {
+			console.log(response)
+		}).catch(e => console.warn('Erro ao enviar e-mail: ' + e)))
 		.then(() => {
-			alert(mensagem)
+			alert(msgAlert)
 			document.location.reload()
 		})
 		.catch(e => alert(e.message))

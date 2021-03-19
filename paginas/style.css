@@ -4,14 +4,10 @@ body {
     margin-left: 30px;
 }
 
-.pagina {
+.pagina, .hidden, #opcoes {
     display: none;
     flex-direction: column;
     width: fit-content;
-}
-
-#conectando {
-    display: block;
 }
 
 fieldset {

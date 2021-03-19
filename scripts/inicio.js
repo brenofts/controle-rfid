@@ -6,17 +6,14 @@ function verificarConexao() {
                 alert("Verificar conexão de Internet")
                 document.location.reload()
             } else {
-                console.log("Conectado")
+                console.log("O pai tá on")
                 show(pInicio)
                 hide(conectando)
                 inputTagTP.focus()
             }
         })
-    }, 2000)
+    }, 2500)
 }
-
-verificarConexao()
-
 
 //Fazer a leitura do TP
 inputTagTP.addEventListener("input", () => {
@@ -91,3 +88,26 @@ btnBusca.addEventListener('click', () => {
 // }
 
 // db.ref('usuarios/joao_esteves').set(joao)
+
+btnSelecionarPosto.addEventListener('click', () => {
+    localStorage.setItem('posto', selectPosto.value)
+    document.getElementById('nomePosto').innerText = 'OGCOT | ' + localStorage.getItem('posto')
+    show(conectando)
+    verificarPosto()
+})
+
+
+var verificarPosto = () => {
+    if (localStorage.getItem('posto') == null) {
+        show(selecaoPosto)
+    } else {
+        posto = localStorage.getItem('posto')
+        console.log(posto)
+        document.getElementById('nomePosto').innerText = 'OGCOT | ' + posto
+        hide(selecaoPosto)
+        show(conectando)
+        verificarConexao()
+    }
+}
+
+verificarPosto()

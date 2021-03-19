@@ -9,13 +9,13 @@ function resultadoZero(x) {
         alert("nenhum resultado")
     } else {
         if (x == 1) {
-            alert("Foi encontrado 1 resultado")
+            alert("Foi encontrado 1 resultado. Clique em OK para visualizar.")
             imprimir('tabela')
             setTimeout(() => {
                 document.location.reload()
             }, 1000)
         } else {
-            alert("Foram encontrados " + x + " resultados")
+            alert("Foram encontrados " + x + " resultados. Clique em OK para visualizar.")
             imprimir('tabela')
             setTimeout(() => {
                 document.location.reload()

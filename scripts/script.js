@@ -1,5 +1,5 @@
 firebase.auth().signInAnonymously().then(user => {
-  console.log('o pai tá on', user);
+  console.log(user);
 }).catch(error => alert(error.message));
 //funções que alteram a exibição (css-display) dos elementos 
 function show(x) {
@@ -28,6 +28,11 @@ const pOpcoes = document.getElementById('opcoes')
 const pTabela = document.getElementById('tabela')
 
 const conectando = document.getElementById('conectando')
+
+const selecaoPosto = document.getElementById('selecaoPosto')
+const selectPosto = document.getElementById('selectPosto')
+const btnSelecionarPosto = document.getElementById('btnSelecionarPosto')
+
 
 const inputTagTP = document.getElementById('tagTP')
 const inputTagUsuario = document.getElementById('tagUsuario')
@@ -66,13 +71,23 @@ var id
 var matricula
 var status
 var gerente
-var posto = 'T-PAS'
+var posto
 var tagTP
 var tagUsuario
 var tagGerente
 var livre
 var tpEmUso
 var diferencaHora
+var chave
+var mensagem
+var msgAlert
+var email
+var url = 'https://script.google.com/macros/s/AKfycbzavgwqiNWhjKWLJbkKLi-Cs1rhgpNwjacJrRAQ9bszwQhnrhX-b_7CT-kKmp4MGUSVgA/exec'
+var fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
+var header = {
+  method: 'POST',
+  mode: 'no-cors'
+}
 
 
 //anulando o submit
@@ -91,3 +106,31 @@ function ajustarHora() {
     document.location.reload()
   }
 }
+
+var ajustarHora = () => {
+  return new Promise((resolve, reject) => {
+    if (new Date().getTimezoneOffset() == 180) {
+      db.ref('.info/serverTimeOffset').once('value', snap => {
+        diferencaHora = snap.val()
+      })
+      resolve(diferencaHora)
+    } else {
+      reject('Verifique as configurações de fuso horário deste computador.')
+    }
+  })
+}
+
+// // Save data to sessionStorage
+// sessionStorage.setItem('key', 'value');
+
+// // Get saved data from sessionStorage
+// let data = sessionStorage.getItem('key');
+
+// // Remove saved data from sessionStorage
+// sessionStorage.removeItem('key');
+
+// // Remove all saved data from sessionStorage
+// sessionStorage.clear();
+
+
+//https://script.google.com/macros/s/AKfycbx_GhIGB1toKuHjMi4p8MLXWIhc6hUY80GbNPpVeG1hcTGgrBp6-M5OFo7ydD_Epjkw/exec

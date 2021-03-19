@@ -12,7 +12,7 @@ function buscarData(dia) {
 					'Busca pela data ' +
 					data +
 					' | Realizada em ' +
-					new Date(new Date().getTime() + diferencaHora).toLocaleString()
+					new Date(new Date().getTime() + diferencaHora).toLocaleString()  + ' | ' + posto
 				conteudoBusca[0] = tituloTabela.innerHTML
 				for (var i = 0; i < valores.length; i++) {
 					// a data deve ser ajustada considerando a diferença de 3h do fuso horário de brasília
@@ -50,7 +50,11 @@ formBuscaData.addEventListener('submit', e => {
 	e.preventDefault()
 	if (inputDataBuscar.value != '') {
 		ajustarHora()
-		buscarData(inputDataBuscar.valueAsNumber)
+		.then(() => buscarData(inputDataBuscar.valueAsNumber))
+		.catch(e => {
+			alert(e)
+			document.location.reload()
+		})
 	} else {
 		alert('Selecione a data')
 	}
