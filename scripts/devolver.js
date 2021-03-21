@@ -80,7 +80,7 @@ function devolver(i, m, t, p, g) {
 
 	updates['/usuarios/' + i.replace('.', '_') + '/livre/'] = true
 	updates['/usuarios/' + i.replace('.', '_') + '/tp/'] = '-'
-	msgAlert = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + ', ' + new Date(registro.data).toLocaleString() + ' ' + chave
+	msgAlert = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + ' ' + new Date(registro.data).toLocaleString() + ' ' + chave
 	mensagem = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
 	email = i + '@metro.df.gov.br,' + g + '@metro.df.gov.br'
 	fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
