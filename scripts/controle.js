@@ -1,7 +1,7 @@
-maisOpc.addEventListener('click', () => {
-	hide(pInicio)
-	showInline(pOpcoes)
-	show(pControle)
+click('maisOpc', () => {
+	hideId('inicio')
+	showId('opcoes', 'inline')
+	showId('controle', 'flex')
 	ajustarHora()
 		.then(() => controle())
 		.catch(e => {
@@ -10,9 +10,10 @@ maisOpc.addEventListener('click', () => {
 		})
 })
 
-btnControle.addEventListener('click', () => {
-	show(pControle)
-	hide(pBusca)
+click('btnControle', () => {
+	showId('controle', 'flex')
+	hideId('busca')
+	hideId('cadastro')
 	controle()
 })
 

@@ -23,7 +23,6 @@ function buscarMatr(matricula) {
 						resultadoBusca++
 						conteudoBusca[i + 1] = valores[i]
 					}
-					console.log(resultadoBusca)
 				}
 				return resultadoZero(resultadoBusca)
 			}
@@ -31,10 +30,6 @@ function buscarMatr(matricula) {
 		}).catch(e => console.log(e.message))
 }
 
-btnBuscaMatr.addEventListener('click', () => {
-	show(buscaMatr)
-	hide(buscaData)
-})
 
 formBuscaMatr.addEventListener('submit', e => {
 	e.preventDefault()
@@ -47,8 +42,16 @@ formBuscaMatr.addEventListener('submit', e => {
 		})
 	} else {
 		alert('Preencha corretamente')
+		inputMatrBuscar.focus()
 	}
 })
+
+click('btnBuscaMatr', () => {
+	showId('buscaMatr', 'flex')
+	hideId('buscaData')
+	inputMatrBuscar.focus()
+})
+
 
 // var item = `<tr style="background-color: red; color: white">
 // 							<td><strong>${valores[i].tp}</strong></td>

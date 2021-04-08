@@ -33,18 +33,12 @@ function buscarData(dia) {
 						resultadoBusca++
 						conteudoBusca[i + 1] = valores[i]
 					}
-					console.log(resultadoBusca)
 				}
 				return resultadoZero(resultadoBusca)
 			}
 			gerarTabela(resultado.reverse())
 		})
 }
-
-btnBuscaData.addEventListener('click', () => {
-	hide(buscaMatr)
-	show(buscaData)
-})
 
 formBuscaData.addEventListener('submit', e => {
 	e.preventDefault()
@@ -58,4 +52,10 @@ formBuscaData.addEventListener('submit', e => {
 	} else {
 		alert('Selecione a data')
 	}
+})
+
+click('btnBuscaData', () => {
+	hideId('buscaMatr')
+	showId('buscaData', 'flex')
+	inputDataBuscar.focus()
 })

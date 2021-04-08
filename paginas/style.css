@@ -10,8 +10,43 @@ body {
     width: fit-content;
 }
 
+form {
+    display: flex;
+    flex-direction: inherit;
+}
+
+input {
+    margin: 15px;
+}
+
+select {
+    font-size: 12pt;
+    padding: 5px;
+}
+
 fieldset {
     border-radius: 5px;
     border: lightgray solid 1px;
 }
 
+button {
+    padding: 5px 12px 5px 12px;
+    font-size: 13pt;
+    font-family: monospace;
+    box-shadow: lightgray 3px 4px;
+    margin: 0px 4px 0px 4px;
+}
+
+.menu {
+    display: inline;
+    width: fit-content;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.menu-oculto {
+    display: none;
+    width: fit-content;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

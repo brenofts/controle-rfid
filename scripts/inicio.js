@@ -7,8 +7,8 @@ function verificarConexao() {
                 document.location.reload()
             } else {
                 console.log("O pai tá on")
-                show(pInicio)
-                hide(conectando)
+                showId('inicio', 'flex')
+                hideId('conectando')
                 inputTagTP.focus()
             }
         })
@@ -46,16 +46,16 @@ inputTagTP.addEventListener("input", () => {
 function verificarStatus() {
     if (status == 'Em uso') {
         console.log('TP em uso, devolva seu monstro!!!')
-        hide(pInicio)
-        show(pDevolver)
+        hideId('inicio')
+        showId('devolver', 'flex')
         idTPDevolver.innerText = id
         numTPDevolver.innerText = tp
         inputTagGerente.focus()
     } else {
         if(status == 'Devolvido') {
             console.log('Tp devolvido')
-            hide(pInicio)
-            show(pRetirar)
+            hideId('inicio')
+            showId('retirar', 'flex')
             numTPRetirar.innerText = tp
             inputTagUsuario.focus()
         }
@@ -68,14 +68,15 @@ function verificarStatus() {
 //     console.log(snap.val())
 // })
 
-btnVoltar.addEventListener('click', () => {
-    document.location.reload()
+click('btnVoltar', () => document.location.reload())
+
+click('btnBusca', () => {
+    showId('busca', 'flex')
+    hideId('controle')
+    hideId('cadastro')
 })
 
-btnBusca.addEventListener('click', () => {
-    show(pBusca)
-    hide(pControle)
-})
+// btnBusca.addEventListener()
 
 
 // const joao = {
@@ -89,23 +90,23 @@ btnBusca.addEventListener('click', () => {
 
 // db.ref('usuarios/joao_esteves').set(joao)
 
-btnSelecionarPosto.addEventListener('click', () => {
+click('btnSelecionarPosto', () => {
     localStorage.setItem('posto', selectPosto.value)
     document.getElementById('nomePosto').innerText = 'OGCOT | ' + localStorage.getItem('posto')
-    show(conectando)
+    showId('conectando', 'flex')
     verificarPosto()
 })
 
 
 var verificarPosto = () => {
     if (localStorage.getItem('posto') == null) {
-        show(selecaoPosto)
+        showId('divSelecaoPosto', 'flex')
     } else {
         posto = localStorage.getItem('posto')
         console.log(posto)
         document.getElementById('nomePosto').innerText = 'OGCOT | ' + posto
-        hide(selecaoPosto)
-        show(conectando)
+        hideId('divSelecaoPosto')
+        showId('conectando', 'flex')
         verificarConexao()
     }
 }

@@ -44,6 +44,7 @@ inputTagUsuario.addEventListener("input", () => {
     }
 })
 
+
 function retirar(i, m, t, p) {
     // o valor que será atualizado
     var registro = {
@@ -72,7 +73,7 @@ function retirar(i, m, t, p) {
 
     updates["/usuarios/" + i.replace(".", "_") + "/livre/"] = false
     updates["/usuarios/" + i.replace(".", "_") + "/tp/"] = t
-    msgAlert = t + ' retirado por ' + i + ' em ' + p + ' ' + new Date(registro.data).toLocaleString() + ' ' + chave
+    msgAlert = t + ' retirado por ' + i + ' em ' + p + '\n' + new Date(registro.data).toLocaleString() + '\nRegistro ' + chave
 	  mensagem = t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString() 
     email = i + '@metro.df.gov.br'
     fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
@@ -83,7 +84,7 @@ function retirar(i, m, t, p) {
         .update(updates)
         .then(fetch(encodeURI(fetchUrl), header).then((response) => {
           console.log(response)
-        }).catch(e => console.warn('Erro ao enviar e-mail: ' + e)))
+        }).catch(e => alert('Erro ao enviar e-mail: ' + e)))
         .then(() => {
             alert(msgAlert)
             document.location.reload()

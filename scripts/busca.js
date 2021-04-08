@@ -26,53 +26,6 @@ function resultadoZero(x) {
 }
 
 
-// BUSCA POR TP
-
-function buscarTP(tp) {
-    db
-        .ref("historico")
-        .once("value")
-        .then((snapshot) => {
-            var data = Object.values(snapshot.val())
-            function gerarTabela(valores) {
-                for (var i = 0; i < valores.length; i++) {
-                    var tpReg = valores[i].tp
-                    if (tp == tpReg) {
-                        console.log(valores[i])
-                        resultadoBusca++
-                    }
-                    console.log(resultadoBusca)
-                }
-                return resultadoZero(resultadoBusca)
-            }
-            gerarTabela(data)
-        })
-}
-
-// BUSCA POR POSTO
-
-function buscarPosto(posto) {
-    database
-        .ref("historico")
-        .once("value")
-        .then((snapshot) => {
-            var data = Object.values(snapshot.val())
-            function gerarTabela(valores) {
-                for (var i = 0; i < valores.length; i++) {
-                    var postoReg = valores[i].posto
-                    if (posto == postoReg) {
-                        console.log(valores[i])
-                        resultadoBusca++
-                    }
-                    console.log(resultadoBusca)
-                }
-                return resultadoZero(resultadoBusca)
-            }
-            gerarTabela(data)
-        })
-}
-
-
 // IMPRIMIR
 // criar um <div id="imprimir"> com as informaçoes da variavel conteudoBusca
 // em formato de tabela simples
