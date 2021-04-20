@@ -1,3 +1,8 @@
+click('btnBusca', () => {
+	showId('busca', 'flex')
+	hideIds(['controle', 'cadastro', 'transporte'])
+})
+
 // contador incrementado a cada resultado de busca encontrado
 var resultadoBusca = 0
 var conteudoBusca = []
@@ -12,17 +17,17 @@ function resultadoZero(x) {
             alert("Foi encontrado 1 resultado. Clique em OK para visualizar.")
             imprimir('tabela')
             setTimeout(() => {
-                document.location.reload()
+                reload()
             }, 1000)
         } else {
             alert("Foram encontrados " + x + " resultados. Clique em OK para visualizar.")
             imprimir('tabela')
             setTimeout(() => {
-                document.location.reload()
+                reload()
             }, 1000)
         }
-        resultadoBusca = 0
     }
+    resultadoBusca = 0
 }
 
 

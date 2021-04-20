@@ -38,7 +38,7 @@ formBuscaMatr.addEventListener('submit', e => {
 		.then(() => buscarMatr(inputMatrBuscar.value))
 		.catch(e => {
 			alert(e)
-			document.location.reload()
+			reload()
 		})
 	} else {
 		alert('Preencha corretamente')

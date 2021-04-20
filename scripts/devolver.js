@@ -2,7 +2,8 @@
 
 inputTagGerente.addEventListener('input', () => {
 	tagGerente = inputTagGerente.value
-	if (tagGerente.length == 8) {
+	if (tagGerente.length == 10) {
+		clearInterval(stopFocusGerente)
 		db.ref('usuarios')
 			.once('value')
 			.then(snap => {
@@ -18,26 +19,26 @@ inputTagGerente.addEventListener('input', () => {
 						.then(() => devolver(id, matricula, tp, posto, gerente))
 						.catch(e => {
 							alert(e)
-							document.location.reload()
+							reload()
 						})
 				} else {
 					if (ehGerente == false) {
 						alert('Operação autorizada somente para gerentes')
-						document.location.reload()
+						reload()
 					}
 				}
 			})
 			.catch(error => {
 				if (error.message.includes('contains NaN')) {
 					alert('Não foi possível realizar o registro de devolução.')
-					document.location.reload()
+					reload()
 				} else {
 					if (error.message.includes('Cannot read property')) {
 						alert('TAG não cadastrada')
-						document.location.reload()
+						reload()
 					} else {
 						alert('Algo deu errado: ' + error.message)
-						document.location.reload()
+						reload()
 					}
 				}
 				console.log(error.message)
@@ -50,7 +51,7 @@ inputTagGerente.addEventListener('input', () => {
 // 		devolver(id, matricula, tp, posto, gerente)
 // 	} else {
 // 		alert('Verificar configuração de fuso horário deste computador.')
-// 		document.location.reload()
+// 		reload()
 // 	}
 // }
 
@@ -80,7 +81,9 @@ function devolver(i, m, t, p, g) {
 
 	updates['/usuarios/' + i.replace('.', '_') + '/livre/'] = true
 	updates['/usuarios/' + i.replace('.', '_') + '/tp/'] = '-'
-	msgAlert = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + '\n' + new Date(registro.data).toLocaleString() + '\nRegistro ' + chave
+	msgAlert = `
+		<p>${t} devolvido por ${i} para ${g} em ${p}</p><p> ${new Date(registro.data).toLocaleString()} </p><p>Registro ${chave} </p>
+	`
 	mensagem = t + ' devolvido por ' + i + ' para ' + g + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
 	email = i + '@metro.df.gov.br,' + g + '@metro.df.gov.br'
 	fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
@@ -94,8 +97,7 @@ function devolver(i, m, t, p, g) {
 			console.log(response)
 		}).catch(e => alert('Erro ao enviar e-mail: ' + e)))
 		.then(() => {
-			alert(msgAlert)
-			document.location.reload()
+			showAlert(msgAlert)
 		})
 		.catch(e => alert(e.message))
 }

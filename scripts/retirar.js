@@ -1,6 +1,7 @@
 inputTagUsuario.addEventListener("input", () => {
     tagUsuario = inputTagUsuario.value
-    if (tagUsuario.length == 8) {      
+    if (tagUsuario.length == 10) {
+      clearInterval(stopFocusUsuario)      
       db.ref("usuarios")
       .once("value")
       .then((snap) => {
@@ -18,32 +19,31 @@ inputTagUsuario.addEventListener("input", () => {
             .then(() => retirar(id, matricula, tp, posto))
             .catch(e => {
               alert(e)
-              document.location.reload()
+              reload()
             })
           } else {
             if (livre == false) {
               alert('Consta TP ' + tpEmUso + ' em nome de ' + id)
-              document.location.reload()
+              reload()
             }
           }
       }).catch(error => {
         if (error.message.includes('contains NaN')) {
           alert('Não foi possível realizar o registro de retirada.')
-          document.location.reload()
+          reload()
         } else {
           if (error.message.includes('Cannot read property')){
-            alert('TAG não cadastrada')
-            document.location.reload()
+            alert('TAG não cadastrada \n' + error.message)
+            reload()
           } else {
             alert('Algo deu errado: ' + error.message)
-            document.location.reload()
+            reload()
           }
         }
         console.log(error.message)
       })
     }
 })
-
 
 function retirar(i, m, t, p) {
     // o valor que será atualizado
@@ -73,7 +73,9 @@ function retirar(i, m, t, p) {
 
     updates["/usuarios/" + i.replace(".", "_") + "/livre/"] = false
     updates["/usuarios/" + i.replace(".", "_") + "/tp/"] = t
-    msgAlert = t + ' retirado por ' + i + ' em ' + p + '\n' + new Date(registro.data).toLocaleString() + '\nRegistro ' + chave
+    msgAlert = `
+      <p> ${t} retirado por ${i} em ${p} </p><p> ${new Date(registro.data).toLocaleString()} </p><p>Registro ${chave}</p>
+    `
 	  mensagem = t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString() 
     email = i + '@metro.df.gov.br'
     fetchUrl = url + '?mensagem=' +  mensagem + '&email=' + email + '&chave=' + chave
@@ -86,34 +88,15 @@ function retirar(i, m, t, p) {
           console.log(response)
         }).catch(e => alert('Erro ao enviar e-mail: ' + e)))
         .then(() => {
-            alert(msgAlert)
-            document.location.reload()
+            showAlert(msgAlert)
         })
         .catch((e) => {
             return alert(e.message)
         })
 }
 
-// function doPost(e) {
-//   mail(e)
-// }
 
-// function mail(e){
-//   var message = e.parameter.message
-//   var email = e.parameter.email
-
-//   MailApp.sendEmail(email,
-//                   "Teste",
-//                   message);
-// }
-
-
-
-
-
-
-
-// https://script.google.com/macros/s/AKfycbx2oKGVIkePVCDC3xO4ieOxRWUBpoIRCJfqQ2SX/exec
+// https://script.google.com/macros/s/AKfycbx2oKGVIkePVCDC3xO4ieOxRWUBpoIRCJfqQ2SX/exec?
 
 // data=
 // &hora=

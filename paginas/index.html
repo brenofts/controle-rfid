@@ -10,6 +10,9 @@
 
 	<body>
 		<h1 id="nomePosto">OGCOT</h1>
+		<center>
+			<div id="alert"></div>
+		</center>
 		<div class="hidden" id="conectando">Conectando...</div>
 		<div class="hidden" id="divSelecaoPosto">
 			<h2>Selecione o posto</h2>
@@ -20,13 +23,15 @@
 			</select>
 			<button id="btnSelecionarPosto">Selecionar</button>
 		</div>
+		<div id="checarGerente">
+		</div>
 		<div id="principal">
 			<div class="pagina" id="inicio">
 				<h1>Início</h1>
 				<form autocomplete="off" id="formRFIDTP">
 					<fieldset>
-						<legend>Tag TP</legend>
-						<label><input type="password" name="tag" id="inputTagTP" size="10" maxlength="8" title="Leitura RFID" /></label>
+						<legend>Apresente o TP</legend>
+						<label><input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/></label>
 					</fieldset>
 				</form>
 				<br /><br />
@@ -37,10 +42,38 @@
 				<div id="numTPRetirar"></div>
 				<form autocomplete="off" id="formRFIDRetirar">
 					<fieldset>
-						<legend>Tag Usuário</legend>
-						<label><input type="password" name="tag" id="inputTagUsuario" size="10" maxlength="8" /></label>
+						<legend>Apresente a TAG do usuário</legend>
+						<label><input type="password" name="tag" id="inputTagUsuario" size="10" maxlength="10" /></label>
 					</fieldset>
-				</form>
+				<!--Botão que possibilita retirar sem tag-->
+                    <button id="btnRetirar" title="Disponibiliza retiradada pelo empregado sem a Tag, utilizando Matrícula e Senha.">Retirar sem Tag</button>
+                <!--Form abaixo contem o quadro onde se endtra com matrícula e senha; matrícula com 5 dígitos e 
+                senha com quatro dígitos.-->
+                </form>
+                   <form autocomplete="off" id="formulario4" class="pagina">
+                    <fieldset id="caixaSenhaRet">
+                        <legend>Matrícula</legend>
+                        <label
+                            ><input
+                                type="text"
+                                name="matriculaRetirar"
+                                id="matRetirar"
+                                size="10"
+                                maxlength="5"
+                        /></label>
+                        <legend>Senha</legend>
+                        <label 
+                            ><input
+                                type="password"
+                                name="pinRets"
+                                id="pinRetirar"
+                                size="10"
+                                maxlength="4"
+                        /></label>
+                         <button id="entraRetirar" title="Enter">Enviar</button>
+                    </fieldset><br>
+                    <br><br><button id = "utilizarTagRet" title="Possibilita retornar para o registro do usuário com Tag.">Volta p/ Tag</button>
+                </form>
 			</div>
 			<div class="pagina" id="devolver">
 				<h1>Devolver</h1>
@@ -48,19 +81,17 @@
 				<div id="idTPDevolver"></div>
 				<form autocomplete="off" id="formRFIDDevolver">
 					<fieldset>
-						<legend>Tag Gerente</legend>
-						<label><input type="password" name="tag" id="inputTagGerente" size="10" maxlength="8" /></label>
+						<legend>Apresente a TAG de gerente</legend>
+						<label><input type="password" name="tag" id="inputTagGerente" size="10" maxlength="10" /></label>
 					</fieldset>
 				</form>
 			</div>
 			<div class="menu" id="opcoes">
 				<button id="btnControle">Controle</button>
-				<button id="btnBusca">Busca</button>
-				<button id="btnRetirar">Retirar</button>
-				<button id="btnDevolver">Devolver</button>
+				<button id="btnBusca">Busca</button> 	
 				<button id="btnTransporte">Transporte</button>
 				<button id="btnCadastro">Cadastro</button>
-				<button id="btnVoltar">Voltar</button>
+				<button id="btnVoltar">Início</button>
 			</div>
 			<div class="pagina" id="transporte">
 				<h1>Transporte</h1>
@@ -94,7 +125,7 @@
 				</div>
 				<div class="pagina" id="buscaMatr">
 					<form autocomplete="off" id="formBuscaMatr">
-						<input type="text" name="matricula" id="inputMatrBuscar" />
+						<input type="text" placeholder="Matrícula" name="matricula" id="inputMatrBuscar" />
 						<input type="submit" value="Buscar" id="btnBuscarMatr" />
 					</form>
 				</div>
@@ -124,35 +155,49 @@
 			<div class="pagina" id="cadastro">
 				<h1>Cadastro</h1>
 				<div class="menu">
+					<button id="btnCadastroUsuario">Usuário</button>
 					<button id="btnCadastroTp">TP</button>
-					<button id="btnCadastroEmpregado">Empregado</button>
 				</div>
-				<div class="menu-oculto" id="opcoesCadastro">
-                    <h3 id="tpOuEmpregado"></h3>
-					<button id="btnNovoCadastro">Novo Cadastro</button>
-					<button id="btnAtualizarCadastro">Atualizar Cadastro</button>
+				<div class="menu-oculto" id="opcoesUsuario">
+                    <h3>Usuário</h3>
+										<div class="menu">
+											<button id="btnNovaSenha">Nova Senha</button>
+										<button id="btnAtualizarUsuario">Atualizar Cadastro</button>
+										<button id="btnNovoUsuario">Novo Cadastro</button>
+										</div>
+										<div style="margin-top: 35px;">
+											<fieldset class="hidden" id="divNovoUsuario">
+												<legend>Novo Usuário</legend>
+												
+													<form class="grid" autocomplete="off" id="formNovoUsuario">
+															<label for="matricula">Matrícula</label>
+																	<input type="text" name="matricula" placeholder="Matrícula" id="matriculaNovo" size=7 maxlength="5">
+															
+															<label for="id">Login SEI</label>
+																	<input type="text" name="id" placeholder="login.sei" id="idNovo" size="15">
+															
+															<label for="tag">TAG RFID</label>
+															<input type="password" placeholder="Apresente no leitor" name="tag" id="tagNovo" size=7>
+														
+															<label for="cargo">Cargo</label>
+																	<select name="cargo" id="cargo">
+																		<option value="Piloto">Piloto</option>
+																		<option value="IT">Inspetor</option>
+																		<option value="Gerente">Gerente</option>
+																	</select>
+															
+															<p></p>
+															<input type="submit" value="Cadastrar">
+													</form>
+								
+											</fieldset>
+										</div>
 				</div>
-                <div class="hidden" id="divNovoEmpregado">
-                    <form autocomplete="off" id="formNovoEmpregado">
-                        <label for="matricula">Matrícula
-                            <input type="text" name="matricula" id="matriculaNovo">
-                        </label>
-                        <label for="id">Login SEI
-                            <input type="text" name="id" id="idNovo">
-                        </label>
-												<label for="tag">TAG RFID
-													<input type="password" name="tag" id="tagNovo">
-											</label>
-                        <label for="cargo">Cargo
-                            <select name="cargo" id="cargo">
-															<option value="Piloto">Piloto</option>
-															<option value="IT">Inspetor</option>
-															<option value="Gerente">Gerente</option>
-														</select>
-                        </label>
-												<input type="submit" value="Cadastrar">
-                    </form>
-                </div>
+				<div class="menu-oculto" id="opcoesTP">
+                    <h3>TP</h3>
+										<button id="btnAtualizarTP">Atualizar TP</button>
+										<button id="btnNovoTP">Novo TP</button>
+				</div>
                 <div id="divAtualizarCadastro"></div>
 			</div>
 		</div>
@@ -184,5 +229,6 @@
 		<script src="../scripts/buscaTP.js"></script>
 		<script src="../scripts/controle.js"></script>
 		<script src="../scripts/cadastro.js"></script>
+		<script src="../scripts/transporte.js"></script>
 	</body>
 </html>

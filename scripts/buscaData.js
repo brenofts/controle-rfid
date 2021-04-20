@@ -47,7 +47,7 @@ formBuscaData.addEventListener('submit', e => {
 		.then(() => buscarData(inputDataBuscar.valueAsNumber))
 		.catch(e => {
 			alert(e)
-			document.location.reload()
+			reload()
 		})
 	} else {
 		alert('Selecione a data')

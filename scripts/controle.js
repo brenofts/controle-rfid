@@ -1,4 +1,5 @@
 click('maisOpc', () => {
+	clearInterval(stopFocusTP)
 	hideId('inicio')
 	showId('opcoes', 'inline')
 	showId('controle', 'flex')
@@ -6,14 +7,13 @@ click('maisOpc', () => {
 		.then(() => controle())
 		.catch(e => {
 			alert(e)
-			document.location.reload()
+			reload()
 		})
 })
 
 click('btnControle', () => {
 	showId('controle', 'flex')
-	hideId('busca')
-	hideId('cadastro')
+	hideIds(['busca', 'cadastro', 'transporte'])
 	controle()
 })
 

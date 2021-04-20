@@ -1,3 +1,5 @@
+
+
 // BUSCA POR TP
 
 function buscarTP(tp) {

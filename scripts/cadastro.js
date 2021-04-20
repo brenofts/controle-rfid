@@ -1,38 +1,40 @@
 click('btnCadastro', () => {
-	hideId('inicio')
-	hideId('busca')
-	hideId('controle')
-	showId('opcoes', 'inline')
+	verificarGerente()
+	hideIds(['busca', 'controle', 'transporte'])
 	showId('cadastro', 'flex')
 })
 
+
+
 click('btnCadastroTp', () => {
-	showId('opcoesCadastro', 'inline')
-	tpOuEmpregado.innerText = 'TP'
-	hideId('divNovoEmpregado')
+	showId('opcoesTP', 'inline')
+	hideId('opcoesUsuario')
 })
 
-click('btnCadastroEmpregado', () => {
-	showId('opcoesCadastro', 'inline')
-	tpOuEmpregado.innerText = 'Empregado'
+click('btnCadastroUsuario', () => {
+	showId('opcoesUsuario', 'inline')
+	hideId('opcoesTP')
 })
 
-click('btnNovoCadastro', () => {
-	if (tpOuEmpregado.innerText == 'Empregado') {
-		showId('divNovoEmpregado', 'flex')
-	}
-	if (tpOuEmpregado.innerText == 'TP') {
-		console.log('novo tp')
-	}
+click('btnNovaSenha', () => {
+	console.log('nova senha')
+	hideId('divNovoUsuario')
 })
 
-click('btnAtualizarCadastro', () => {
-	if (tpOuEmpregado.innerText == 'Empregado') {
-		console.log('atualizar empregado')
-		hideId('divNovoEmpregado')
-	}
-	if (tpOuEmpregado.innerText == 'TP') {
-		console.log('atualizar tp')
-	}
+click('btnNovoUsuario', () => {
+	showId('divNovoUsuario', 'flex')
+})
+
+click('btnAtualizarUsuario', () => {
+	console.log('atualizar usuário')
+	hideId('divNovoUsuario')
+})
+
+click('btnNovoTP', () => {
+	console.log('novo tp')
+})
+
+click('btnAtualizarTP', () => {
+	console.log('atualizar tp')
 })
 
