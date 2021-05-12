@@ -1,6 +1,6 @@
 click('btnBusca', () => {
 	showId('busca', 'flex')
-	hideIds(['controle', 'cadastro', 'transporte'])
+	hideIds(['controle', 'cadastro', 'transporte', 'selecionarTP'])
 })
 
 // contador incrementado a cada resultado de busca encontrado
@@ -47,5 +47,3 @@ function imprimir(tabela) {
   
       return true;
   }
-
-

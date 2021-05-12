@@ -31,25 +31,42 @@ const ids = [
 	'inputDataBuscar',
   'formRFIDTP',
   'formRFIDRetirar',
+	'formSenhaRetirar',
   'formRFIDDevolver',
   "formNovoEmpregado",
-	'checarGerente'
+	'checarGerente',
+	'inputMatrRetirar',
+	'inputSenhaRetirar',
+	'entraRetirar',
+	'idTransporte',
+	'inputTagTPTransp',
+	'inputDataInicial',
+	'inputDataFinal',
+	'lblDataFinal'
 ]
 
 const createVariables = () => {
-	for (let i = 0; i < ids.length; i++) {
-		const element = id[i]
-		var id = element.getAttribute('id')
+	ids.map(id => {
 		var createVar = 'window.' + id + '= document.getElementById("' + id + '")'
 		eval(createVar)
-	}
+	})
+	// for (let i = 0; i < ids.length; i++) {
+	// 	const element = id[i]
+	// 	var id = element.getAttribute('id')
+	// 	var createVar = 'window.' + id + '= document.getElementById("' + id + '")'
+	// 	eval(createVar)
+	// }
 }
 
+createVariables()
+
 // variáveis que serão úteis para os registros
-var tp, id, matricula, status, gerente, posto, email
+var dataTransporte
+var retirarMatricula, retirarSenha
+var tp, id, matricula, status, gerente, posto, email, pin
 var tagTP, tagUsuario, tagGerente
 var livre, tpEmUso
-var diferencaHora
+var diferencaHora, hoje, dataInicial, dataFinal
 var chave, mensagem, msgAlert
 var url =	'https://script.google.com/macros/s/AKfycbzavgwqiNWhjKWLJbkKLi-Cs1rhgpNwjacJrRAQ9bszwQhnrhX-b_7CT-kKmp4MGUSVgA/exec'
 var fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
@@ -59,11 +76,10 @@ var header = {
 }
 
 //anulando o submit
-formRFIDTP.addEventListener('submit', e => e.preventDefault())
-formRFIDRetirar.addEventListener('submit', e => e.preventDefault())
-formRFIDDevolver.addEventListener('submit', e => e.preventDefault())
-formNovoUsuario.addEventListener('submit', e => e.preventDefault())
-
+window.addEventListener('submit', e => {
+	e.preventDefault()
+	e.stopPropagation()
+})
 
 
 // verificando fuso horário e corrigindo diferenças de horário em relação ao servidor do Firebase
@@ -112,6 +128,22 @@ const focusGerente = () => {
 	if (inputTagGerente != document.activeElement) {
 			inputTagGerente.focus()
 			console.log('focusGerente')
+		}
+	}, 100)
+}
+
+const focusVerificarGerente = () => {
+	window.stopFocusVerificarGerente = setInterval(() => {
+	if (verificarTAGGerente != document.activeElement) {
+			verificarTAGGerente.focus()
+		}
+	}, 100)
+}
+
+const focusTagTpTransp = () => {
+	window.stopFocusTagTpTransp = setInterval(() => {
+	if (inputTagTPTransp != document.activeElement) {
+			inputTagTPTransp.focus()
 		}
 	}, 100)
 }

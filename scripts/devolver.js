@@ -101,3 +101,15 @@ function devolver(i, m, t, p, g) {
 		})
 		.catch(e => alert(e.message))
 }
+
+click('btnDevolver', () => {
+	clearInterval(stopFocusGerente)
+	hideId('divFormRFIDDevolver')
+	showId('divFormSenhaDevolver', 'block')
+})
+
+click('utilizarTagDev', () => {
+	focusGerente()
+	showId('divFormRFIDDevolver', 'block')
+	hideId('divFormSenhaDevolver')
+})

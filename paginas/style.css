@@ -12,8 +12,7 @@ body {
 }
 
 form {
-    display: flex;
-    flex-direction: inherit;
+    display: block;
 }
 
 input {
@@ -74,4 +73,85 @@ button {
     font-size: 20pt;
     width: 60%;
     box-shadow: gray 5px 5px;
+}
+
+#falhaLeitor {
+    color: red
+}
+
+.grid-transporte{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 10px;
+}
+
+.grid-transporte-item {
+    background-color:darkorange;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: center;
+    margin: 1px;
+}
+
+#grid-inicio {
+    margin-top: 5vw;
+}
+
+.grid-container-inicio {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+[class*='item-inicio'] {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 8px 10px 8px 10px;
+    font-size: 2vw;
+    text-align: center;
+    margin: 1px;
+    width: 18vw;
+    height: 5vw;
+}
+
+[class*='item-inicio']:hover {
+    color: white
+}
+
+.item-inicio-red{
+    background-color: red;
+}
+
+.item-inicio-green{
+    background-color: green;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    padding: 10px;
+}
+
+[class*='grid-item-'] {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 30px;
+    text-align: center;
+    margin: 1px;
+    cursor: pointer;
+}
+
+[class*='grid-item-']:hover {
+    opacity: 90%;
+    color: gray;
+}
+
+.grid-item-devolvido {
+    background-color: blue;
+}
+.grid-item-emuso {
+    background-color: yellow;
+}
+.grid-item-bloqueado {
+    background-color: grey;
+    color: lightgray
 }

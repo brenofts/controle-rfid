@@ -1,33 +1,30 @@
-click('btnCadastro', () => {
-	verificarGerente()
-	hideIds(['busca', 'controle', 'transporte'])
-	showId('cadastro', 'flex')
-})
-
-
+click('btnCadastro', () => verificarGerente('cadastro'))
 
 click('btnCadastroTp', () => {
 	showId('opcoesTP', 'inline')
-	hideId('opcoesUsuario')
+	hideIds(['opcoesUsuario','divNovaSenha'])
 })
 
 click('btnCadastroUsuario', () => {
 	showId('opcoesUsuario', 'inline')
-	hideId('opcoesTP')
+	hideIds(['opcoesTP','divNovaSenha'])
 })
 
 click('btnNovaSenha', () => {
 	console.log('nova senha')
-	hideId('divNovoUsuario')
+	hideIds(['divNovoUsuario','divAtualizarUsuario'])
+	showId('divNovaSenha','flex')
 })
 
 click('btnNovoUsuario', () => {
 	showId('divNovoUsuario', 'flex')
+	hideIds(['divNovaSenha','divAtualizarUsuario'])
 })
 
 click('btnAtualizarUsuario', () => {
 	console.log('atualizar usuário')
-	hideId('divNovoUsuario')
+	hideIds(['divNovaSenha','divNovoUsuario'])
+	showId('divAtualizarUsuario','flex')
 })
 
 click('btnNovoTP', () => {

@@ -16,6 +16,7 @@ function verificarConexao() {
 }
 
 //Fazer a leitura do TP
+
 inputTagTP.addEventListener('input', () => {
 	tagTP = inputTagTP.value
 	if (tagTP.length == 10) {
@@ -36,8 +37,10 @@ inputTagTP.addEventListener('input', () => {
 			})
 			.catch(error => {
 				console.log(error.message)
-				alert('TAG não cadastrada')
-				reload()
+				setTimeout(() => {
+					alert('TAG não cadastrada')
+					reload()
+				}, 100)
 			})
 	}
 })
@@ -72,7 +75,6 @@ function verificarStatus() {
 // })
 
 click('btnVoltar', () => reload())
-
 
 // btnBusca.addEventListener()
 
@@ -109,16 +111,17 @@ var verificarPosto = () => {
 
 verificarPosto()
 
-const verificarGerente = () => {
+const verificarGerente = (action) => {
 	hideId('principal')
+	tpsIncluidos = []
 	checarGerente.innerHTML = `
     <h4>Apresente credencial de Gerente</h4>
     <input type="password" name="" id="verificarTAGGerente">
     `
 	var tagGerente = document.getElementById('verificarTAGGerente')
-	tagGerente.focus()
+	focusVerificarGerente()
 	tagGerente.addEventListener('input', () => {
-		if (tagGerente.value.length == 8) {
+		if (tagGerente.value.length == 10) {
 			db.ref('usuarios')
 				.once('value')
 				.then(snap => {
@@ -132,28 +135,75 @@ const verificarGerente = () => {
 						if (ehGerente) {
 							gerente = usuarioEncontrado.id
 							matricula = usuarioEncontrado.matricula
-                            checarGerente.innerHTML = ''
-                            showId('principal', 'block')
+							checarGerente.innerHTML = ''
+							showId('principal', 'block')
+							switch (action) {
+								case 'transporte':
+									hideIds(['controle', 'busca', 'cadastro', 'selecionarTP', 'opcoes'])
+  								showId('transporte', 'flex')
+									idTransporte.innerHTML = gerente
+									focusTagTpTransp()
+									break
+								case 'cadastro':
+									console.log('Página de cadastro aberta por', gerente)
+									hideIds(['busca', 'controle', 'transporte', 'selecionarTP'])
+									showId('cadastro', 'flex')
+									break
+								default:
+									break
+							}
+							clearInterval(stopFocusVerificarGerente)
 						} else {
-                            alert('Operação autorizada somente para gerentes')
-                            reload()
-                        }
+							alert('Operação autorizada somente para gerentes')
+							reload()
+						}
 					} else {
-                        alert('Usuário não cadastrado')
-                        reload()
-                    }
+						alert('Usuário não cadastrado')
+						reload()
+					}
 				})
 		}
 	})
 }
 
-const showAlert = (message) => {
+const showAlert = message => {
 	hideId('principal')
 	showId('alert', 'block')
-	document.getElementById('alert').innerHTML = `
-		<p>${message}</p>
-	`
+	document.getElementById('alert').innerHTML = `<p>${message}</p>`
 	setTimeout(() => {
 		reload()
-	}, 10000);
+	}, 10000)
 }
+
+const mostrarTPs = () => {
+	setTimeout(() => {
+		document.querySelector('h3').classList.remove('hidden')
+		db.ref('tps').on('value', snap => {
+			var resultado = Object.values(snap.val())
+			var count = 0
+			resultado.map(tp => {
+				var hoje = new Date().getTime()
+				var evento = new Date(tp.status.data).getTime()
+				var x = hoje - evento
+				var z = 1000 * 3600 * 24
+				var dias = Math.floor(x / z)
+				var cssClass
+				var data = new Date(tp.status.data).toLocaleString()
+				var title = 'Retirado em ' + data + ' - ' + tp.status.posto
+				switch (tp.status.status) {
+					case 'Em uso':
+						count++
+						dias > 2 ? (cssClass = 'item-inicio-red') : (cssClass = 'item-inicio-green')
+						var gridItem = `<div title="${title}" class="${cssClass}"><div>${tp.tp}</div><div>${tp.status.id}</div></div>`
+						document.getElementById('tpsEmUso').innerHTML += gridItem
+						break
+				}
+			})
+			count == 0
+				? (document.getElementById('tpsEmUso').innerHTML = `<p>Não constam TPs em uso</p>`)
+				: console.log('TPs em uso:', count)
+		})
+	}, 5000)
+}
+
+mostrarTPs()
