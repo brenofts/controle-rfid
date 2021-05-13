@@ -13,6 +13,7 @@ click('falhaLeitor', () => {
         case 'Em uso':
           cssClass = 'grid-item-emuso'
           break
+        case 'Transporte':  
         case 'Bloqueado':
           cssClass = 'grid-item-bloqueado'
           break;

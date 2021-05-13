@@ -69,7 +69,7 @@ const controle = () => {
               </tr>`
 						bodyControle.innerHTML += item
 					} else {
-						if (valores[i].status.status == 'Transporte') {
+						if (valores[i].status.status == 'Transporte' || valores[i].status.status == 'Bloqueado') {
 							var item = `<tr  style="background-color: darkgrey; color: white">
                 <td><strong>${valores[i].tp}</strong></td>
                 <td>${valores[i].status.status}</td>

@@ -64,6 +64,20 @@ function verificarStatus() {
 			numTPRetirar.innerText = tp
 			inputTagUsuario.focus()
 			focusUsuario()
+		} else {
+			if (status == 'Transporte') {
+				setTimeout(() => {
+					alert('TP ' + tp + ' em Transporte')
+					reload()
+				}, 100);
+			} else {
+				if (status == 'Bloqueado') {
+					setTimeout(() => {
+						alert('TP ' + tp + ' bloqueado')
+						reload()
+					}, 100);
+				}
+			}
 		}
 	}
 }
@@ -179,6 +193,7 @@ const mostrarTPs = () => {
 	setTimeout(() => {
 		document.querySelector('h3').classList.remove('hidden')
 		db.ref('tps').on('value', snap => {
+			document.getElementById('tpsEmUso').innerHTML = ''
 			var resultado = Object.values(snap.val())
 			var count = 0
 			resultado.map(tp => {

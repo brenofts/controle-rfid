@@ -2,7 +2,7 @@
 
 click('btnBuscaPosto', () => {
 	showId('buscaPosto', 'flex')
-	hideIds(['buscaData', 'buscaMatr'])
+	hideIds(['buscaData', 'buscaMatr', 'buscaTP'])
 })
 
 function buscarPosto(posto) {

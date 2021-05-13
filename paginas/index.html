@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<link rel="stylesheet" href="style.css" />
 		<meta charset="UTF-8" />
@@ -36,7 +36,7 @@
 					</fieldset>
 				</form>
 				<br><br>
-				<button id="maisOpc" title="Buscas, Cadastro, Retirar, Devolver...">Mais opções</button>
+				<button id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 				</div>
 				<div id="grid-inicio">
 					<h3 class="hidden" title="Abaixo estão os TPs em uso: Em Verde até 2 dias e Em Vermelho mais de 2 dias">TPs em uso</h3>
@@ -150,7 +150,6 @@
 					<button id="btnBuscaData">Data</button>
 					<button id="btnBuscaTP">TP</button>
 					<button id="btnBuscaPosto">Posto</button>
-					<button id="btnBuscaGerente">Gerente</button>
 				</div>
 				<div class="pagina" id="buscaMatr">
 					<form autocomplete="off" id="formBuscaMatr">
@@ -163,11 +162,14 @@
 						<label for="inputDataInicial">Data Inicial</label>
 						<input id="inputDataInicial" type="date" />
 						<label id='lblDataFinal'for="inputDataFinal" class="hidden">Data Final</label>
-						<input id="inputDataFinal" class="hidden" type="date" />
+						<input  id="inputDataFinal" class="hidden" type="date" />
 						<input class="hidden" type="submit" id="btnBuscarData" value="Buscar" />
 					</form>
 				</div>
-				<div id="buscaTP"></div>
+				<div class="pagina" id="buscaTP">
+					<h2 title = "Escolha o TP no qual queira ver o Histórico de Registros.">Busca por TP</h2>
+					<div class="grid-container" id="tabelaBuscaTPs"></div>
+				</div>
 				<div class="pagina" id="buscaPosto">
 					<h2>Selecione o Posto</h2>
 					<select name="buscaTp" id="selBuscaPosto">

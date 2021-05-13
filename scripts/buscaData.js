@@ -1,4 +1,10 @@
 // BUSCA POR DATA
+click('btnBuscaData', () => {
+	setMax()
+	hideIds(['buscaMatr', 'buscaPosto', 'buscaTP'])
+	showId('buscaData', 'flex')
+	inputDataInicial.focus()
+})
 
 function buscarData(dia) {
 	db.ref('historico')
@@ -74,12 +80,6 @@ const setMax = () => {
 	document.getElementById('inputDataFinal').setAttribute('max', today)
 }
 
-click('btnBuscaData', () => {
-	setMax()
-	hideId('buscaMatr')
-	showId('buscaData', 'flex')
-	inputDataInicial.focus()
-})
 
 inputDataInicial.addEventListener('input', () => {
 	dataInicial = Date.parse(inputDataInicial.value) + 10800000
@@ -87,6 +87,7 @@ inputDataInicial.addEventListener('input', () => {
 	var mes = new Date().getMonth()
 	var ano = new Date().getFullYear()
 	hoje = new Date(ano, mes, dia).getTime()
+	inputDataInicial.blur()
 	document.getElementById('btnBuscarData').classList.remove('hidden')
 	if (dataInicial == hoje) {
 		qualData = 'hoje'

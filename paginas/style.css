@@ -138,6 +138,7 @@ button {
     text-align: center;
     margin: 1px;
     cursor: pointer;
+    background-color: ghostwhite;
 }
 
 [class*='grid-item-']:hover {

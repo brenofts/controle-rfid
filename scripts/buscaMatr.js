@@ -1,5 +1,11 @@
 // BUSCA POR MATRÍCULA
 
+click('btnBuscaMatr', () => {
+	showId('buscaMatr', 'flex')
+	hideIds(['buscaData', 'buscaPosto', 'buscaTP'])
+	inputMatrBuscar.focus()
+})
+
 function buscarMatr(matricula) {
 	db.ref('historico')
 		.once('value')
@@ -44,12 +50,6 @@ formBuscaMatr.addEventListener('submit', e => {
 		alert('Preencha corretamente')
 		inputMatrBuscar.focus()
 	}
-})
-
-click('btnBuscaMatr', () => {
-	showId('buscaMatr', 'flex')
-	hideId('buscaData')
-	inputMatrBuscar.focus()
 })
 
 
