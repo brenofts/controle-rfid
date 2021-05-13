@@ -38,7 +38,6 @@ function buscarPosto(posto) {
 var btnBuscouPosto = document.getElementById('btnBuscarPosto')
 var selBuscouPosto = document.getElementById('selBuscaPosto')
 btnBuscouPosto.addEventListener('click', e => {
-    alert(selBuscouPosto.value)
 	e.preventDefault()
     buscarPosto(selBuscaPosto.value)
 })

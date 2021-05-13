@@ -22,6 +22,7 @@ click('falhaLeitor', () => {
     })
     resultado.map(tp => document.getElementById(tp.tp).addEventListener('click', () => {
       status = tp.status.status
+      matricula = tp.status.matricula
       switch (status) {
         case 'Devolvido':
           retirarComSenha(tp.tp)

@@ -160,6 +160,8 @@ inputSenhaRetirar.addEventListener('focus', () => {
 			var encontrarUsuario = item => item.matricula == retirarMatricula
 			var usuarioEncontrado = resultado.find(encontrarUsuario)
 			if (usuarioEncontrado != undefined) {
+			document.getElementById('cancelaRetirar').removeAttribute('class')
+			inputMatrRetirar.disabled = true
 			id = usuarioEncontrado.id
 			matricula = usuarioEncontrado.matricula
 			livre = usuarioEncontrado.livre

@@ -37,12 +37,15 @@ const ids = [
 	'checarGerente',
 	'inputMatrRetirar',
 	'inputSenhaRetirar',
+	'inputMatrDevolver',
+	'inputSenhaDevolver',
 	'entraRetirar',
 	'idTransporte',
 	'inputTagTPTransp',
 	'inputDataInicial',
 	'inputDataFinal',
-	'lblDataFinal'
+	'lblDataFinal',
+	'nomeDoGerente'
 ]
 
 const createVariables = () => {
@@ -62,7 +65,7 @@ createVariables()
 
 // variáveis que serão úteis para os registros
 var dataTransporte
-var retirarMatricula, retirarSenha
+var retirarMatricula, retirarSenha, devolverMatricula, devolverSenha
 var tp, id, matricula, status, gerente, posto, email, pin
 var tagTP, tagUsuario, tagGerente
 var livre, tpEmUso

@@ -46,6 +46,61 @@ inputTagGerente.addEventListener('input', () => {
 	}
 })
 
+//Devolver com senha Ler a Matrícula
+inputSenhaDevolver.addEventListener('focus',()=> {
+	devolverMatricula = inputMatrDevolver.value
+		if (devolverMatricula.length > 2) {
+			db.ref('usuarios').once('value').then(snap => {
+				var resultado = Object.values(snap.val())
+				var encontrarUsuario = item => item.matricula == devolverMatricula
+				var usuarioEncontrado = resultado.find(encontrarUsuario)
+				if (usuarioEncontrado != undefined) {
+					inputMatrDevolver.disabled = true
+					document.getElementById('cancelaDevolver').removeAttribute('class')
+					gerente = usuarioEncontrado.id
+					var ehgerente = usuarioEncontrado.gerente
+					if (ehgerente == true){
+					document.getElementById('nomeDoGerente').innerHTML = "Gerente: " + gerente 
+					} else {
+					alert('Operação autorizada somente para gerentes')					
+					inputMatrDevolver.value = ""
+					inputMatrDevolver.focus()
+						}
+				} else {
+					alert('Matrícula ' + devolverMatricula + ' não encontrada')
+					inputMatrDevolver.value = ''
+					inputMatrDevolver.focus()
+				}
+			})
+		}
+})
+
+
+//Devolver com senha Ler a Senha
+inputSenhaDevolver.addEventListener('input',() => {
+	if(inputMatrDevolver.value.length > 2 && inputSenhaDevolver.value.length == 4){
+		devolverSenha = inputSenhaDevolver.value
+		db.ref('usuarios').once('value').then(snap => {
+			var resultado = Object.values(snap.val())
+			var encontrarUsuario = item => item.matricula == devolverMatricula
+			var usuarioEncontrado = resultado.find(encontrarUsuario)
+			pin = usuarioEncontrado.p / 1993
+			if (pin == devolverSenha) {
+				ajustarHora()
+					.then(() => devolver(id, matricula, tp, posto, gerente))
+					.catch(e => {
+						alert(e)
+						document.location.reload()
+					})
+			} else {
+				alert('Senha incorreta')
+				inputSenhaRetirar.value = ''
+				inputSenhaRetirar.focus()
+				
+			}		
+		})
+	}
+})
 // function verificarFusoDevolver() {
 // 	if (new Date().getTimezoneOffset() == 180) {
 // 		devolver(id, matricula, tp, posto, gerente)

@@ -30,7 +30,7 @@
 				<div>
 					<h1>Início</h1>
 				<form autocomplete="off" id="formRFIDTP">
-					<fieldset>
+					<fieldset title="Aproxime o TP do leitor para iniciar o Registro.">
 						<legend>Apresente TP</legend>
 						<label><input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/></label>
 					</fieldset>
@@ -39,7 +39,7 @@
 				<button id="maisOpc" title="Buscas, Cadastro, Retirar, Devolver...">Mais opções</button>
 				</div>
 				<div id="grid-inicio">
-					<h3 class="hidden">TPs em uso</h3>
+					<h3 class="hidden" title="Abaixo estão os TPs em uso: Em Verde até 2 dias e Em Vermelho mais de 2 dias">TPs em uso</h3>
 					<div id="tpsEmUso" class="grid-container-inicio">
 				</div>
 				</div>
@@ -66,7 +66,7 @@
 										<legend>Usuário</legend>
 										<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> <br>
 										<input type="password" placeholder="Senha" name="pinRets" id="inputSenhaRetirar" size="10" maxlength="4"/>
-										 <!-- <button id="entraRetirar" title="Enter">Enviar</button> -->
+										<button class="hidden" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
 								</fieldset>
 							</form>
 								<br><br><br>
@@ -90,10 +90,10 @@
 				<div id="divFormSenhaDevolver" class="pagina">
 					<form autocomplete="off" id="formSenhaDevolver">
 						<fieldset>
-								<legend>Gerente</legend>
+								<legend id="nomeDoGerente">Gerente</legend>
 								<input type="text" placeholder="Matrícula" id="inputMatrDevolver" size="10" maxlength="5"/><br>
 								<input type="password" placeholder="Senha" id="inputSenhaDevolver" size="10" maxlength="4" />
-								 <!-- <button id="entraRetirar" title="Enter">Enviar</button> -->
+								<button class="hidden" onclick="reload()" id="cancelaDevolver" title="Cancela">Cancelar</button>
 						</fieldset>
 					</form>
 						<br><br><br>
