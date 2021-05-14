@@ -12,7 +12,8 @@ function buscarMatr(matricula) {
 		.then(snapshot => {
 			var resultado = Object.values(snapshot.val())
 			function gerarTabela(valores) {
-				tituloTabela.innerHTML = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + posto
+				var titulo = 'Busca pela matrícula ' + matricula + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + posto
+				tituloTabela.innerHTML, tituloImpressao = titulo
 				conteudoBusca[0] = tituloTabela.innerHTML
                 for (var i = 0; i < valores.length; i++) {
 					if (matricula == valores[i].matricula) {

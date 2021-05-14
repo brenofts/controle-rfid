@@ -64,7 +64,7 @@ const createVariables = () => {
 createVariables()
 
 // variáveis que serão úteis para os registros
-var dataTransporte
+var dataTransporte, tituloImpressao
 var retirarMatricula, retirarSenha, devolverMatricula, devolverSenha
 var tp, id, matricula, status, gerente, posto, email, pin
 var tagTP, tagUsuario, tagGerente

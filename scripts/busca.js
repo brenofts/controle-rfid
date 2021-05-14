@@ -39,7 +39,7 @@ function resultadoZero(x) {
 function imprimir(tabela) {
     var mywindow = window.open('', Math.random(), '');
   
-      mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css"><title>' + document.title  + '</title>');
+      mywindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css"><title>' + tituloImpressao  + '</title>');
       mywindow.document.write('</head><body >');
       mywindow.document.write('<h1>' + document.title  + '</h1>');
       mywindow.document.write(document.getElementById(tabela).innerHTML);
