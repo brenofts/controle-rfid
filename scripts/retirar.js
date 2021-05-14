@@ -47,58 +47,67 @@ inputTagUsuario.addEventListener('input', () => {
 })
 
 function retirar(i, m, t, p) {
-	// o valor que será atualizado
-	var registro = {
-		status: 'Em uso',
-		id: i,
-		matricula: m,
-		tp: t,
-		posto: p,
-		gerente: '-',
-		data: new Date().getTime() + diferencaHora,
-	}
+	db.ref('tps/' + tp + '/status/status')
+		.once('value')
+		.then(snap => {
+			if (snap.val() == 'Devolvido') {
+				// o valor que será atualizado
+				var registro = {
+					status: 'Em uso',
+					id: i,
+					matricula: m,
+					tp: t,
+					posto: p,
+					gerente: '-',
+					data: new Date().getTime() + diferencaHora,
+				}
 
-	chave = db.ref().child('historico').push().key
-	// cria uma variável do tipo objeto
-	var updates = {}
-	// cria um item nesse objeto updates[item] = "valor do item"
-	// seria updates = {
-	//  /tps/tp/status : registro,
-	//  /historico/chave : registro,
-	//  /usuarios/id/livre : false
-	//  /usuarios/id/tp : tp
-	// }
-	updates['/tps/' + t + '/status/'] = registro
-	updates['/historico/' + chave] = registro
-	// bloqueia ou libera o usuario
+				chave = db.ref().child('historico').push().key
+				// cria uma variável do tipo objeto
+				var updates = {}
+				// cria um item nesse objeto updates[item] = "valor do item"
+				// seria updates = {
+				//  /tps/tp/status : registro,
+				//  /historico/chave : registro,
+				//  /usuarios/id/livre : false
+				//  /usuarios/id/tp : tp
+				// }
+				updates['/tps/' + t + '/status/'] = registro
+				updates['/historico/' + chave] = registro
+				// bloqueia ou libera o usuario
 
-	updates['/usuarios/' + i.replace('.', '_') + '/livre/'] = false
-	updates['/usuarios/' + i.replace('.', '_') + '/tp/'] = t
-	msgAlert = `
+				updates['/usuarios/' + i.replace('.', '_') + '/livre/'] = false
+				updates['/usuarios/' + i.replace('.', '_') + '/tp/'] = t
+				msgAlert = `
       <p> ${t} retirado por ${i} em ${p} </p><p> ${new Date(
-		registro.data
-	).toLocaleString()} </p><p>Registro ${chave}</p>
+					registro.data
+				).toLocaleString()} </p><p>Registro ${chave}</p>
     `
-	mensagem = t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
-	email = i + '@metro.df.gov.br'
-	fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
+				mensagem = t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
+				email = i + '@metro.df.gov.br'
+				fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
 
-	// retorna chamando o firebase para escrever as atualizacoes
-	return db
-		.ref()
-		.update(updates)
-		.then(
-			fetch(encodeURI(fetchUrl), header)
-				.then(response => {
-					console.log(response)
-				})
-				.catch(e => alert('Erro ao enviar e-mail: ' + e))
-		)
-		.then(() => {
-			showAlert(msgAlert)
-		})
-		.catch(e => {
-			return alert(e.message)
+				// retorna chamando o firebase para escrever as atualizacoes
+				return db
+					.ref()
+					.update(updates)
+					.then(
+						fetch(encodeURI(fetchUrl), header)
+							.then(response => {
+								console.log(response)
+							})
+							.catch(e => alert('Erro ao enviar e-mail: ' + e))
+					)
+					.then(() => {
+						showAlert(msgAlert)
+					})
+					.catch(e => {
+						return alert(e.message)
+					})
+			} else {
+				alert('TP ' + tp + ' foi registrado em outro posto')
+				reload()
+			}
 		})
 }
 
@@ -153,65 +162,73 @@ click('utilizarTagRet', () => {
 // })
 
 inputSenhaRetirar.addEventListener('focus', () => {
-	db.ref('tps/' + tp + '/status').on('child_changed', snap => {
-		alert('ATENÇÃO: Erro - Houve mudança no registro do TP ' + tp + ' em outro terminal')
-		db.ref('tps/' + tp + '/status').off()
-		reload()
-	})
+	// db.ref('tps/' + tp + '/status').on('child_changed', snap => {
+	// 	if (snap.val() == 'Em uso') {
+	// 		db.ref('tps/' + tp + '/status').off()
+	// 		alert('Erro - TP retirado em outro posto')
+	// 		reload()
+	// 	}
+	// 	// alert('ATENÇÃO: Erro - Houve mudança no registro do TP ' + tp + ' em outro terminal')
+	// 	// db.ref('tps/' + tp + '/status').off()
+	// 	// reload()
+	// })
 	retirarMatricula = inputMatrRetirar.value
 	if (retirarMatricula.length > 2) {
-		db.ref('usuarios').once('value').then(snap => {
-			var resultado = Object.values(snap.val())
-			var encontrarUsuario = item => item.matricula == retirarMatricula
-			var usuarioEncontrado = resultado.find(encontrarUsuario)
-			if (usuarioEncontrado != undefined) {
-			document.getElementById('cancelaRetirar').removeAttribute('class')
-			inputMatrRetirar.disabled = true
-			id = usuarioEncontrado.id
-			matricula = usuarioEncontrado.matricula
-			livre = usuarioEncontrado.livre
-			tpEmUso = usuarioEncontrado.tp
-			if (livre == false) {
-				alert('Consta TP ' + tpEmUso + ' em nome de ' + id)
-				reload()
-			} else {
-				if (livre == true) {
-					document.getElementById('idRetirar').innerText = id
+		db.ref('usuarios')
+			.once('value')
+			.then(snap => {
+				var resultado = Object.values(snap.val())
+				var encontrarUsuario = item => item.matricula == retirarMatricula
+				var usuarioEncontrado = resultado.find(encontrarUsuario)
+				if (usuarioEncontrado != undefined) {
+					document.getElementById('cancelaRetirar').removeAttribute('class')
+					inputMatrRetirar.disabled = true
+					id = usuarioEncontrado.id
+					matricula = usuarioEncontrado.matricula
+					livre = usuarioEncontrado.livre
+					tpEmUso = usuarioEncontrado.tp
+					if (livre == false) {
+						alert('Consta TP ' + tpEmUso + ' em nome de ' + id)
+						reload()
+					} else {
+						if (livre == true) {
+							document.getElementById('idRetirar').innerText = id
+						}
+					}
+				} else {
+					alert('Matrícula ' + retirarMatricula + ' não encontrada')
+					inputMatrRetirar.value = ''
+					inputMatrRetirar.focus()
 				}
-			}
-			} else {
-				alert('Matrícula ' + retirarMatricula + ' não encontrada')
-				inputMatrRetirar.value = ''
-				inputMatrRetirar.focus()
-			}
-		})
+			})
 	} else {
 		alert('Preencha a matrícula corretamente')
 		inputMatrRetirar.focus()
 	}
-	
 })
 
 inputSenhaRetirar.addEventListener('input', () => {
 	if (inputMatrRetirar.value.length > 2 && inputSenhaRetirar.value.length == 4) {
 		retirarSenha = inputSenhaRetirar.value
-		db.ref('usuarios').once('value').then(snap => {
-			var resultado = Object.values(snap.val())
-			var encontrarUsuario = item => item.matricula == retirarMatricula
-			var usuarioEncontrado = resultado.find(encontrarUsuario)
-			pin = usuarioEncontrado.p / 1993
-			if (pin == retirarSenha) {
-				ajustarHora()
-					.then(() => retirar(id, matricula, tp, posto))
-					.catch(e => {
-						alert(e)
-						document.location.reload()
-					})
-			} else {
-				alert('Senha incorreta')
-				inputSenhaRetirar.value = ''
-				inputSenhaRetirar.focus()
-			}		
-		})
+		db.ref('usuarios')
+			.once('value')
+			.then(snap => {
+				var resultado = Object.values(snap.val())
+				var encontrarUsuario = item => item.matricula == retirarMatricula
+				var usuarioEncontrado = resultado.find(encontrarUsuario)
+				pin = usuarioEncontrado.p / 1993
+				if (pin == retirarSenha) {
+					ajustarHora()
+						.then(() => retirar(id, matricula, tp, posto))
+						.catch(e => {
+							alert(e)
+							document.location.reload()
+						})
+				} else {
+					alert('Senha incorreta')
+					inputSenhaRetirar.value = ''
+					inputSenhaRetirar.focus()
+				}
+			})
 	}
-	})
+})
