@@ -15,13 +15,14 @@ function buscarData(dia) {
 				//var ajusteHorario = 10800000
 				//var data = new Date(dia + ajusteHorario).toLocaleDateString()
 				var data = new Date(dia).toLocaleDateString()
-				tituloTabela.innerHTML =
-					'Busca pela data ' +
-					data +
-					' | Realizada em ' +
-					new Date(new Date().getTime() + diferencaHora).toLocaleString() +
-					' | ' +
-					posto
+				var titulo = 'Busca pela data ' +
+				data +
+				' | Realizada em ' +
+				new Date(new Date().getTime() + diferencaHora).toLocaleString() +
+				' | ' +
+				posto 
+				tituloTabela.innerHTML, tituloImpressao = titulo
+ 					
 				conteudoBusca[0] = tituloTabela.innerHTML
 				for (var i = 0; i < valores.length; i++) {
 					// a data deve ser ajustada considerando a diferença de 3h do fuso horário de brasília

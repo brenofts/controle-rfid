@@ -5,7 +5,8 @@ function buscarTP(numeroTP) {
 		.once('value')
 		.then(snapshot => {
 			var buscouTp = Object.values(snapshot.val())
-            tituloTabela.innerHTML = 'Busca de Registros do TP ' + numeroTP + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + window.posto
+            var titulo = 'Busca de Registros do TP ' + numeroTP + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + window.posto
+            tituloTabela.innerHTML, tituloImpressao = titulo
             conteudoBusca[0] = tituloTabela.innerHTML
 			buscouTp.reverse().map(registro => {
                 if(registro.tp == numeroTP) {

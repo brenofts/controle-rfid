@@ -11,7 +11,8 @@ function buscarPosto(posto) {
       .then((snapshot) => {
           var data = Object.values(snapshot.val())
           function gerarTabela(valores) {
-            tituloTabela.innerHTML = 'Busca de Registros do Posto ' + posto + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + window.posto
+            var titulo = 'Busca de Registros do Posto ' + posto + ' | Realizada em ' + new Date(new Date().getTime() + diferencaHora).toLocaleString() + ' | ' + window.posto
+            tituloTabela.innerHTML, tituloImpressao = titulo
             conteudoBusca[0] = tituloTabela.innerHTML
             for (var i = 0; i < valores.length; i++) {
                 if (posto == valores[i].posto) {
