@@ -153,7 +153,7 @@ click('utilizarTagRet', () => {
 // })
 
 inputSenhaRetirar.addEventListener('focus', () => {
-	db.ref('tps/' + tp + '/status/status').on('child_changed', snap => {
+	db.ref('tps/' + tp + '/status').on('child_changed', snap => {
 		alert('ATENÇÃO: Erro - Houve mudança no registro do TP ' + tp + ' em outro terminal')
 		reload()
 	})
