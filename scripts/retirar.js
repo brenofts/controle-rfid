@@ -155,7 +155,7 @@ click('utilizarTagRet', () => {
 inputSenhaRetirar.addEventListener('focus', () => {
 	db.ref('tps/' + tp + '/status').on('child_changed', snap => {
 		alert('ATENÇÃO: Erro - Houve mudança no registro do TP ' + tp + ' em outro terminal')
-		db.ref('tps/' + tp + '/status').off('value', null)
+		db.ref('tps/' + tp + '/status').off()
 		reload()
 	})
 	retirarMatricula = inputMatrRetirar.value
