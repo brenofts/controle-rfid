@@ -1,8 +1,8 @@
 click('falhaLeitor', () => {
-  document.getElementById('tabelaTPs').innerHTML = ''
   showId('selecionarTP', 'block')
   hideIds(['controle', 'cadastro', 'transporte', 'busca'])
-  db.ref('tps').once('value').then(snap => {
+  db.ref('tps').on('value', snap => {
+    document.getElementById('tabelaTPs').innerHTML = ''
     var resultado = Object.values(snap.val())
     resultado.map(tp => {
       var cssClass
@@ -11,9 +11,9 @@ click('falhaLeitor', () => {
           cssClass = 'grid-item-devolvido'
           break
         case 'Em uso':
-          cssClass = 'grid-item-emuso'
+          cssClass = 'grid-item-emuso'          
           break
-        case 'Transporte':  
+        case 'Transporte':
         case 'Bloqueado':
           cssClass = 'grid-item-bloqueado'
           break;
@@ -31,6 +31,9 @@ click('falhaLeitor', () => {
         case 'Em uso':
           devolverComSenha(tp.tp, tp.status.id)
           break
+        case 'Transporte':
+          alert('Transporte')
+          break;
         case 'Bloqueado':
           alert('Bloqueado')
           break;
