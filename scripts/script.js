@@ -45,7 +45,11 @@ const ids = [
 	'inputDataInicial',
 	'inputDataFinal',
 	'lblDataFinal',
-	'nomeDoGerente'
+	'nomeDoGerente',
+	'inputMatrAtualiza',
+	'lerMatr',
+	'idEncontrado',
+	'inputTagAtualiza'
 ]
 
 const createVariables = () => {

@@ -254,27 +254,17 @@
 										<div style="margin-top: 35px;">
 											<fieldset class="hidden" id="divAtualizarUsuario">
 												<legend>Atualizar Usuário</legend>
-												
-													<form class="grid" autocomplete="off" id="formAtualizarUsuario">
+													<form autocomplete="off" id="formAtualizarUsuario">
+														<h2 id='idEncontrado'></h2>
 															<label for="matricula">Matrícula</label>
-																	<input type="text" name="matricula" placeholder="Matrícula" id="matriculaAtualizar" size=7 maxlength="5">
-															
-															<label for="id">Login SEI</label>
-																	<input type="text" name="id" placeholder="login.sei" id="idAtualizar" size="15">
-															
-															<label for="tag">TAG RFID</label>
-															<input type="password" placeholder="Apresente no leitor" name="tag" id="tagAtualizar" size=7>
-														
-															<label for="cargo">Cargo</label>
-																	<select name="cargo" id="cargoAtualizar">
-																		<option value="Piloto">Piloto</option>
-																		<option value="IT">Inspetor</option>
-																		<option value="Gerente">Gerente</option>
-																	</select>
-															
-															<p></p>
-															<input type="submit" value="Cadastrar">
-													</form>
+															<input type="text" name="matricula" placeholder="Matrícula" id="inputMatrAtualiza" size=7 maxlength="5"><br>
+															<button id='lerMatr'>Ir</button>
+															<input class='hidden' type="password" id="inputTagAtualiza">
+														</form>
+														<div id='botoesTagGer' class='hidden'>
+															<button id='trocaTag'>TAG</button>
+															<button id='trocaGerente'>Função</button>
+														</div>
 								
 											</fieldset>
 										</div>
