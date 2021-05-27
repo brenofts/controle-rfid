@@ -49,7 +49,9 @@ const ids = [
 	'inputMatrAtualiza',
 	'lerMatr',
 	'idEncontrado',
-	'inputTagAtualiza'
+	'inputTagAtualiza',
+	'matriculaEsqueci',
+	'matriculaLogin'
 ]
 
 const createVariables = () => {
@@ -75,7 +77,7 @@ var tagTP, tagUsuario, tagGerente
 var livre, tpEmUso
 var diferencaHora, hoje, dataInicial, dataFinal
 var chave, mensagem, msgAlert
-var url =	'https://script.google.com/macros/s/AKfycbzavgwqiNWhjKWLJbkKLi-Cs1rhgpNwjacJrRAQ9bszwQhnrhX-b_7CT-kKmp4MGUSVgA/exec'
+var url =	'https://script.google.com/macros/s/AKfycbzUQLSyejfxRXZLwSIk929bwhpFlk7zjApdfGO76ENLhIi4tWijyNmhSGoOmU6PfwminA/exec'
 var fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
 var header = {
 	method: 'POST',

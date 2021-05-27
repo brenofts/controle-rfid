@@ -79,7 +79,7 @@ function retirar(i, m, t, p) {
 		registro.data
 	).toLocaleString()} </p><p>Registro ${chave}</p>
     `
-	mensagem = t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
+	mensagem = 'TP ' + t + ' retirado por ' + i + ' em ' + p + '<br>' + new Date(registro.data).toLocaleString()
 	email = i + '@metro.df.gov.br'
 	fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
 

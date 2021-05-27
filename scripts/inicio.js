@@ -153,14 +153,14 @@ const verificarGerente = (action) => {
 							showId('principal', 'block')
 							switch (action) {
 								case 'transporte':
-									hideIds(['controle', 'busca', 'cadastro', 'selecionarTP', 'opcoes'])
+									hideIds(['controle', 'busca', 'cadastro', 'selecionarTP', 'opcoes', 'senhas'])
   								showId('transporte', 'flex')
 									idTransporte.innerHTML = gerente
 									focusTagTpTransp()
 									break
 								case 'cadastro':
 									console.log('Página de cadastro aberta por', gerente)
-									hideIds(['busca', 'controle', 'transporte', 'selecionarTP'])
+									hideIds(['busca', 'controle', 'transporte', 'selecionarTP', 'senhas'])
 									showId('cadastro', 'flex')
 									break
 								default:

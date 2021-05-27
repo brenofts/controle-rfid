@@ -13,7 +13,7 @@ click('maisOpc', () => {
 
 click('btnControle', () => {
 	showId('controle', 'flex')
-	hideIds(['busca', 'cadastro', 'transporte', 'selecionarTP'])
+	hideIds(['busca', 'cadastro', 'transporte', 'selecionarTP', 'senhas'])
 	controle()
 })
 

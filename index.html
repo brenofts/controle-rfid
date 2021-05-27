@@ -57,6 +57,7 @@
 						<!--Botão que possibilita retirar sem tag-->
 					</form>
 					<button id="btnRetirar" title="Disponibiliza retiradada pelo empregado sem a Tag, utilizando Matrícula e Senha.">Retirar sem Tag</button>
+					<button id="btnEsqueciRetirar">Esqueci a senha</button>
 				</div>
 					<!--Form abaixo contem o quadro onde se endtra com matrícula e senha; matrícula com 5 dígitos e 
 					senha com quatro dígitos.-->
@@ -86,6 +87,7 @@
 						</fieldset>
 					</form>
 					<button id="btnDevolver">Devolver sem Tag</button>
+					<button id="btnEsqueciDevolver">Esqueci a senha</button>
 				</div>
 				<div id="divFormSenhaDevolver" class="pagina">
 					<form autocomplete="off" id="formSenhaDevolver">
@@ -108,6 +110,7 @@
 				<button id="btnCadastro">Cadastro</button>
 				<button id="btnVoltar">Início</button>
 				<button id="falhaLeitor">Falha no leitor</button>
+				<button id="btnSenhas">Senhas</button>
 			</div>
 			<div class="pagina" id="transporte">
 				<h1>Transporte</h1>
@@ -235,23 +238,7 @@
 								
 											</fieldset>
 										</div>
-										<div style="margin-top: 35px;">
-											<fieldset class="hidden" id="divNovaSenha">
-												<legend>Nova Senha</legend>
-												
-													<form class="grid" autocomplete="off" id="formNovaSenha">
-															<label for="matricula">Matrícula</label>
-																	<input type="text" name="matricula" placeholder="Matrícula" id="matriculaNovaSenha" size=7 maxlength="5">
-															
-															<label for="senha">Nova Senha</label>
-																	<input type="password" name="senha" placeholder="Nova Senha" id="pinNovo" size="15" width="4" title="Digite a Nova Senha com 4 dígitos">
-															<label for="mostrarSenha">Mostrar Senha</label>
-																	<input type="checkbox" name="mostraSenha" id="mostraSenha">																	
-															<p></p>
-															<input type="submit" value="Cadastrar">
-													</form>
-										</div>
-										<div style="margin-top: 35px;">
+											<div style="margin-top: 35px;">
 											<fieldset class="hidden" id="divAtualizarUsuario">
 												<legend>Atualizar Usuário</legend>
 													<form autocomplete="off" id="formAtualizarUsuario">
@@ -276,6 +263,49 @@
                 <div id="divAtualizarCadastro"></div>
 			</div>
 
+			</div>
+			<div class="pagina" id="senhas">
+				<div>
+					<button onclick="abrirEsqueci()">Esqueci a senha</button>
+					<button onclick="abrirAtualiza()">Atualizar a senha</button>
+				</div>
+				<div class="pagina" id="esqueciSenha">
+					<div >
+						<h3 id="idEsqueci"></h3>
+						<input autocomplete="off" placeholder="Matrícula" maxlength="5" type="text" id="matriculaEsqueci">
+						<button id="btnEnviarEqueci">Enviar e-mail</button>
+					</div>
+				</div>
+				<div class="pagina" id="atualizarSenha">
+					<div id="login">
+						<fieldset>
+							<legend>Login</legend>
+								<h3 id="idLogin"></h3>
+								<form class="grid" autocomplete="off" id="login">
+										<label for="matricula">Matrícula</label>
+												<input type="text" name="matricula" placeholder="Matrícula" id="matriculaLogin" size=7 maxlength="5">
+										
+										<label for="senha">Senha</label>
+												<input type="password" name="senha" maxlength="4" placeholder="Senha" id="senhaLogin" size="15" width="4" title="Digite a senha com 4 dígitos">
+								</form>
+						</fieldset>
+					</div>
+					<div class="hidden" id="divNovaSenha" style="margin-top: 35px;">
+						<fieldset>
+							<legend>Nova Senha</legend>
+								<h3 id="idNovaSenha"></h3>
+								<form class="grid" autocomplete="off" id="formNovaSenha">
+										<label for="senha">Nova Senha</label>
+												<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha" maxlength="4" placeholder="Nova Senha" id="pinNovo" size="15" width="4" title="Digite a Nova Senha com 4 dígitos">
+										<label for="senha1">Repita Nova Senha</label>		
+												<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha1" maxlength="4" placeholder="Repita Nova Senha" id="pinNovo1" size="15" width="4" title="Digite novamente a Nova Senha com 4 dígitos">
+												<label for="mostrarSenha">Mostrar Senha</label>
+												<input type="checkbox" onclick="mostrarOcultar()" name="mostraSenha" id="mostraSenha">																	
+										<input type="submit" value="Cadastrar">
+								</form>
+						</fieldset>
+					</div>
+				</div>
 			</div>
 			<div class="pagina" id="selecionarTP">
 			<h1>Selecione o TP</h1>
@@ -314,5 +344,6 @@
 		<script src="./scripts/cadastro.js"></script>
 		<script src="./scripts/transporte.js"></script>
 		<script src="./scripts/semleitor.js"></script>
+		<script src="./scripts/senha.js"></script>
 	</body>
 </html>

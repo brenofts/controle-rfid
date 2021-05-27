@@ -1,6 +1,6 @@
 click('falhaLeitor', () => {
   showId('selecionarTP', 'block')
-  hideIds(['controle', 'cadastro', 'transporte', 'busca'])
+  hideIds(['controle', 'cadastro', 'transporte', 'busca', 'senhas'])
   db.ref('tps').on('value', snap => {
     document.getElementById('tabelaTPs').innerHTML = ''
     var resultado = Object.values(snap.val())
