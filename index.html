@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="style.css" />
+		<link rel="icon" type="imagem/png" id="fav" href="imagens/alert.gif" />
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,14 +10,17 @@
 	</head>
 
 	<body>
-		<h1 id="nomePosto">OGCOT</h1>
+		<div class="title">
+			<h1 id="nomePosto">OGCOT</h1>
+		</div>
 		<center>
 			<div id="alert"></div>
 		</center>
 		<div class="hidden" id="conectando">Conectando...</div>
-		<div class="hidden" id="divSelecaoPosto">
+		<div class="seletor hidden" id="divSelecaoPosto">
 			<h2>Selecione o posto</h2>
 			<select name="Selecione o posto" id="selectPosto">
+				<option value="pst">POSTO</option>
 				<option value="T-PAC">T-PAC</option>
 				<option value="T-PAS">T-PAS</option>
 				<option value="FILA-CLA">FILA-CLA</option>
@@ -34,8 +38,7 @@
 						<legend>Apresente TP</legend>
 						<label><input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/></label>
 					</fieldset>
-				</form>
-				<br><br>
+				</form><br>
 				<button id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 				</div>
 				<div id="grid-inicio">
@@ -64,7 +67,7 @@
 						<form autocomplete="off" id="formSenhaRetirar">
 							<fieldset>
 								<legend>Usuário</legend>
-								<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> <br>
+								<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> 
 								<input type="password" placeholder="Senha" name="pinRets" id="inputSenhaRetirar" size="10" maxlength="4"/>
 								<button class="hidden" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
 							</fieldset>

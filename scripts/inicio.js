@@ -3,9 +3,11 @@ function verificarConexao() {
 	setTimeout(() => {
 		db.ref('.info/connected').on('value', snap => {
 			if (snap.val() === false) {
+				document.getElementById("fav").href = "imagens/alert.gif"
 				alert('Verificar conexão de Internet')
 				reload()
 			} else {
+				document.getElementById("fav").href = "imagens/sepura.png"
 				console.log('O pai tá on')
 				showId('inicio', 'flex')
 				hideId('conectando')
@@ -111,10 +113,12 @@ click('btnVoltar', () => reload())
 // db.ref('usuarios/joao_esteves').set(joao)
 
 click('btnSelecionarPosto', () => {
-	localStorage.setItem('posto', selectPosto.value)
-	document.getElementById('nomePosto').innerText = 'OGCOT | ' + localStorage.getItem('posto')
-	showId('conectando', 'flex')
-	verificarPosto()
+	if (selectPosto.value != "pst"){
+		localStorage.setItem('posto', selectPosto.value)
+		document.getElementById('nomePosto').innerText = 'OGCOT | ' + localStorage.getItem('posto')
+		showId('conectando', 'flex')
+		verificarPosto()
+	} else {alert("Selecione um posto de trabalho válido!")}
 })
 
 var verificarPosto = () => {

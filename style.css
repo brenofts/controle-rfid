@@ -1,29 +1,62 @@
-body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    letter-spacing: 2.0pt;
-    margin-left: 30px;
-    user-select: none;
-    background-color: rgba(216, 194, 150, 0.308);
+* {
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.pagina, .hidden, #opcoes {
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    top: 1em;
+}
+
+#nomePosto {
+    width: 95%;
+    text-align: center;
+    color: #173d72;
+    border-bottom: 2px solid black;
+    padding-bottom: 0.3em;
+}
+
+.seletor {
+    width: 70%;
+    height: 40%;
+    background-color: ghostwhite;
+    border: solid #173d72 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#divSelecaoPosto > select {
+    font-size: 20pt;
+    width: 50%;
+    padding: 8px;
+}
+
+.pagina, #opcoes {
     display: none;
     flex-direction: column;
     width: fit-content;
 }
 
-form {
-    display: block;
-}
-
 input {
-    margin: 15px;
     text-align: center;
-}
-
-select {
-    font-size: 12pt;
-    padding: 5px;
 }
 
 fieldset {
@@ -31,26 +64,14 @@ fieldset {
     border: lightgray solid 1px;
 }
 
-button {
-    padding: 5px 12px 5px 12px;
-    font-size: 13pt;
-    font-family: monospace;
-    box-shadow: lightgray 3px 4px;
-    margin: 0px 4px 0px 4px;
-}
-
 .menu {
     display: inline;
     width: fit-content;
-    margin-top: 15px;
-    margin-bottom: 15px;
 }
 
 .menu-oculto {
     display: none;
     width: fit-content;
-    margin-top: 15px;
-    margin-bottom: 15px;
 }
 
 #inputTagTP {
@@ -67,8 +88,6 @@ button {
 #alert {
     display: none;
     background-color: rgb(66, 168, 66);
-    padding: 10px;
-    margin: 3px;
     border: 2px solid black;
     color: white;
     font-size: 20pt;
@@ -94,10 +113,6 @@ button {
     margin: 1px;
 }
 
-#grid-inicio {
-    margin-top: 5vw;
-}
-
 .grid-container-inicio {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -106,12 +121,8 @@ button {
 
 [class*='item-inicio'] {
     border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 8px 10px 8px 10px;
     font-size: 2vw;
     text-align: center;
-    margin: 1px;
-    width: 18vw;
-    height: 5vw;
 }
 
 [class*='item-inicio']:hover {
@@ -123,7 +134,7 @@ button {
 }
 
 .item-inicio-green{
-    background-color: green;
+    background-color: rgb(0,128,0);
 }
 
 .grid-container {
@@ -156,4 +167,8 @@ button {
 .grid-item-bloqueado {
     background-color: grey;
     color: lightgray
+}
+
+.hidden {
+    display: none;
 }
