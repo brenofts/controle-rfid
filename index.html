@@ -57,22 +57,22 @@
 						<!--Botão que possibilita retirar sem tag-->
 					</form>
 					<button id="btnRetirar" title="Disponibiliza retiradada pelo empregado sem a Tag, utilizando Matrícula e Senha.">Retirar sem Tag</button>
-					<button id="btnEsqueciRetirar">Esqueci a senha</button>
 				</div>
-					<!--Form abaixo contem o quadro onde se endtra com matrícula e senha; matrícula com 5 dígitos e 
+				<!--Form abaixo contem o quadro onde se endtra com matrícula e senha; matrícula com 5 dígitos e 
 					senha com quatro dígitos.-->
-						 <div id='divFormSenhaRetirar' class="pagina">
-							<form autocomplete="off" id="formSenhaRetirar">
-								<fieldset>
-										<legend>Usuário</legend>
-										<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> <br>
-										<input type="password" placeholder="Senha" name="pinRets" id="inputSenhaRetirar" size="10" maxlength="4"/>
-										<button class="hidden" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
-								</fieldset>
-							</form>
-								<br><br><br>
-								<button class="hidden" id="btnRetirarOutro">Escolher outro TP</button>
-								<button id = "utilizarTagRet" title="Possibilita retornar para o registro do usuário com Tag.">Retirar com Tag</button>
+					<div id='divFormSenhaRetirar' class="pagina">
+						<form autocomplete="off" id="formSenhaRetirar">
+							<fieldset>
+								<legend>Usuário</legend>
+								<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> <br>
+								<input type="password" placeholder="Senha" name="pinRets" id="inputSenhaRetirar" size="10" maxlength="4"/>
+								<button class="hidden" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
+							</fieldset>
+						</form>
+						<br><br><br>
+						<button class="hidden" id="btnRetirarOutro">Escolher outro TP</button>
+						<button id = "utilizarTagRet" title="Possibilita retornar para o registro do usuário com Tag.">Retirar com Tag</button>
+						<button id="btnEsqueciRetirar">Esqueci a senha</button>
 						 </div>
 			</div>
 			<div class="pagina" id="devolver">
@@ -204,10 +204,16 @@
 					<button id="btnCadastroUsuario">Usuário</button>
 					<button id="btnCadastroTp">TP</button>
 				</div>
+				<div class="pagina" id="cadastroTp">
+					<div id="opcoesTP">
+						<h3>TP</h3>
+						<button id="btnAtualizarTP">Atualizar TP</button>
+						<button id="btnNovoTP">Novo TP</button>
+					</div>
+				</div>
 				<div class="menu-oculto" id="opcoesUsuario">
                     <h3>Usuário</h3>
 										<div class="menu">
-											<button id="btnNovaSenha">Nova Senha</button>
 										<button id="btnAtualizarUsuario">Atualizar Cadastro</button>
 										<button id="btnNovoUsuario">Novo Cadastro</button>
 										</div>
@@ -255,11 +261,7 @@
 								
 											</fieldset>
 										</div>
-				<div class="menu-oculto" id="opcoesTP">
-                    <h3>TP</h3>
-										<button id="btnAtualizarTP">Atualizar TP</button>
-										<button id="btnNovoTP">Novo TP</button>
-				</div>
+				
                 <div id="divAtualizarCadastro"></div>
 			</div>
 
@@ -301,7 +303,6 @@
 												<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha1" maxlength="4" placeholder="Repita Nova Senha" id="pinNovo1" size="15" width="4" title="Digite novamente a Nova Senha com 4 dígitos">
 												<label for="mostrarSenha">Mostrar Senha</label>
 												<input type="checkbox" onclick="mostrarOcultar()" name="mostraSenha" id="mostraSenha">																	
-										<input type="submit" value="Cadastrar">
 								</form>
 						</fieldset>
 					</div>

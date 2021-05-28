@@ -176,3 +176,10 @@ inputSenhaRetirar.addEventListener('input', () => {
 			})
 	}
 })
+
+click('btnEsqueciRetirar', () => {
+	hideId('retirar')
+	showId('opcoes', 'inline')
+	showId('senhas', 'flex')
+	showId('esqueciSenha', 'flex')
+})

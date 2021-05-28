@@ -68,7 +68,14 @@ function verificarStatus() {
 			if (status == 'Transporte') {
 				setTimeout(() => {
 					alert('TP ' + tp + ' em Transporte')
-					reload()
+					console.log('TP em uso, devolva seu monstro!!!')
+					hideId('inicio')
+					showId('devolver', 'flex')
+					idTPDevolver.innerText = id
+					numTPDevolver.innerText = tp
+					inputTagGerente.focus()
+					focusGerente()
+					
 				}, 100);
 			} else {
 				if (status == 'Bloqueado') {

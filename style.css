@@ -3,6 +3,7 @@ body {
     letter-spacing: 2.0pt;
     margin-left: 30px;
     user-select: none;
+    background-color: rgba(216, 194, 150, 0.308);
 }
 
 .pagina, .hidden, #opcoes {

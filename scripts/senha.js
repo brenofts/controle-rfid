@@ -33,12 +33,15 @@ click('btnEnviarEqueci', () => {
             .then(response => {
               var newPinBd = newPin * 1993
               db.ref('usuarios/'+ id.replace(".","_") + "/p" ).set(newPinBd).then(resp => {
-                alert("Atualize sua Senha assim que puder!")
+                alert("Verifique o seu e-mail e atualize sua senha assim que puder!")
+                window.open('https://cas.gdfnet.df.gov.br/', 'about:blank')
               }).catch( e => alert('Erro ao modificar o Bd: ' + e))
               console.log(response)
-              })
-              .catch(e => alert('Erro ao enviar e-mail: ' + e))
-          } else{alert("Nova senha CANCELADA")}
+            })
+            .catch(e => alert('Erro ao enviar e-mail: ' + e))
+          } else{
+            alert("Nova senha CANCELADA")
+          }
       } else {
         alert('Matrícula não encontrada')
       }

@@ -1,32 +1,29 @@
 click('btnCadastro', () => verificarGerente('cadastro'))
 
 click('btnCadastroTp', () => {
-	showId('opcoesTP', 'inline')
+	showId('cadastroTp', 'inline')
 	hideIds(['opcoesUsuario', 'divNovaSenha'])
 })
 
 click('btnCadastroUsuario', () => {
 	showId('opcoesUsuario', 'inline')
-	hideIds(['opcoesTP', 'divNovaSenha'])
-})
-
-click('btnNovaSenha', () => {
-	console.log('nova senha')
-	hideIds(['divNovoUsuario', 'divAtualizarUsuario'])
-	showId('divNovaSenha', 'flex')
+	hideIds(['cadastroTp', 'divNovaSenha'])
 })
 
 click('btnNovoUsuario', () => {
-	showId('divNovoUsuario', 'flex')
+//	showId('divNovoUsuario', 'flex')
 	hideIds(['divNovaSenha', 'divAtualizarUsuario'])
+	alert('Procure os desenvolvedores!')
 })
 
 click('btnNovoTP', () => {
 	console.log('novo tp')
+	alert('Procure os desenvolvedores')
 })
 
 click('btnAtualizarTP', () => {
-	console.log('atualizar tp')
+	console.log('Chama ')
+	alert('Procure os desenvolvedores')
 })
 
 // Atualizar cadastro (TAG e função)
@@ -203,3 +200,4 @@ function escondeBotoes() {
 		hideId('botoesTagGer')
 	}, 300)
 }
+

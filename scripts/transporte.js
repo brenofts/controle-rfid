@@ -31,6 +31,10 @@ inputTagTPTransp.addEventListener('input', e => {
               alert('TP ' + tpEncontrado.tp + ' já adicionado')
             }, 100);
             inputTagTPTransp.value = ""
+          } else {
+            if(tpEncontrado.status.status == 'Transporte'){
+              alert('TP nº '+ tpEncontrado.tp + 'Em ja em Transporte. Devolva-o')
+            }
           }
         }
       }
