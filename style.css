@@ -4,15 +4,17 @@
 }
 
 body {
+    position: relative;
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
+  
 
 .title {
     width: 100%;
@@ -20,17 +22,52 @@ body {
     top: 0;
     z-index: 10;
     display: flex;
+    background-color: white;
     justify-content: center;
-    top: 1em;
+    padding-top: 1vh;
 }
 
 #nomePosto {
-    width: 95%;
+    width: 90%;
     text-align: center;
     color: #173d72;
     border-bottom: 2px solid black;
     padding-bottom: 0.3em;
 }
+
+#conectando {
+    /* margin-top: 75px; */
+    height: 5em;
+    position: relative;
+    top: 50%;
+}
+
+/* https://loading.io/css */
+
+.lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #173d72;
+    border-color: #f29206 transparent #173d72 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
 .seletor {
     width: 70%;
@@ -43,10 +80,38 @@ body {
     align-items: center;
 }
 
+#divSelecaoPosto {
+    margin-top: 25vh;
+}
+
 #divSelecaoPosto > select {
     font-size: 20pt;
     width: 50%;
     padding: 8px;
+}
+
+button {
+    background-color: #173d72;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: #173d72 solid 2px;
+    font-size: 12pt;
+}
+
+button:hover {
+    background-color: #173d72c0
+}
+
+button:active {
+    border: solid 2px #f29206;
+}
+
+#principal {
+    position: relative;
+    z-index: 1;
+    top: 75px;
+    padding-bottom: 75px;
 }
 
 .pagina, #opcoes {
