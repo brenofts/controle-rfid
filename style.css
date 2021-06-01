@@ -1,6 +1,7 @@
 * {
     margin: 0;
     box-sizing: border-box;
+    letter-spacing: 0.6pt;
 }
 
 body {
@@ -8,7 +9,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     user-select: none;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -18,7 +19,7 @@ body {
 
 .title {
     width: 100%;
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
@@ -39,7 +40,7 @@ body {
     /* margin-top: 75px; */
     height: 5em;
     position: relative;
-    top: 50%;
+    top: 30vh;
 }
 
 /* https://loading.io/css */
@@ -71,7 +72,7 @@ body {
 
 .seletor {
     width: 70%;
-    height: 40%;
+    height: 40vh;
     background-color: ghostwhite;
     border: solid #173d72 2px;
     display: flex;
@@ -97,31 +98,74 @@ button {
     border-radius: 5px;
     border: #173d72 solid 2px;
     font-size: 12pt;
+    margin: 0.1em;
 }
 
 button:hover {
     background-color: #173d72c0
 }
 
-button:active {
+button:active, button:focus {
     border: solid 2px #f29206;
+}
+
+#inicio {
+    display: none;
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+}
+
+#leitor {
+    margin-left: 5vw;
+}
+
+#grid-inicio {
+    margin-left: 2vw;
+    border: solid black 1px;
+   
 }
 
 #principal {
     position: relative;
     z-index: 1;
-    top: 75px;
+    margin-top: 1em;
     padding-bottom: 75px;
-}
-
-.pagina, #opcoes {
-    display: none;
+    display: flex;
     flex-direction: column;
-    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 input {
     text-align: center;
+}
+
+.tabela caption {
+    color: grey;
+    font-size: 8pt;
+    position: sticky;
+    top:55px;
+    background-color: white;
+}
+
+.tabela th {
+    border-radius: 4px;
+    background-color: rgb(236, 236, 236);
+    position: sticky;
+    top:67px;
+    font-size: 10pt;
+    padding: 0.4em;
+    border: 1px solid rgb(226, 226, 226);
+}
+
+.tabela td {
+    border-radius: 4px;
+    border: 1px solid rgb(226, 226, 226);
+    text-align: center;
+    padding: 0.4em;
+    font-size: 14pt;
 }
 
 fieldset {
@@ -130,8 +174,11 @@ fieldset {
 }
 
 .menu {
-    display: inline;
-    width: fit-content;
+    width: 100%;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 2em;
 }
 
 .menu-oculto {
@@ -234,6 +281,6 @@ fieldset {
     color: lightgray
 }
 
-.hidden {
+.hidden, .pagina {
     display: none;
 }

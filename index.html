@@ -33,7 +33,7 @@
 		</div>
 		<div id="principal">
 			<div class="pagina" id="inicio">
-				<div>
+				<div id="leitor">
 					<h1>Início</h1>
 				<form autocomplete="off" id="formRFIDTP">
 					<fieldset title="Aproxime o TP do leitor para iniciar o Registro.">
@@ -134,9 +134,8 @@
 				</div>
 			</div>
 			<div class="pagina" id="controle">
-				<h1>Controle</h1>
 				<div id="processando"></div>
-				<table id="tabelaControle">
+				<table class="tabela" id="tabelaControle">
 					<caption id="updateTime"></caption>
 					<tr>
 						<th>TP</th>
@@ -153,7 +152,7 @@
 			</div>
 			<div class="pagina" id="busca">
 				<h1>Busca</h1>
-				<div class="menu">
+				<div>
 					<button id="btnBuscaMatr">Matrícula</button>
 					<button id="btnBuscaData">Data</button>
 					<button id="btnBuscaTP">TP</button>

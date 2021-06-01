@@ -69,12 +69,12 @@ const devolverComSenha = (pepe, anthony) => {
 click('btnRetirarOutro', () => {
   hideId('retirar')
   showId('selecionarTP', 'flex')
-  showId('opcoes', 'inline')
+  showId('opcoes', 'flex')
 })
 
 click('btnDevolverOutro', () => {
   hideId('devolver')
   showId('selecionarTP', 'flex')
-  showId('opcoes', 'inline')
+  showId('opcoes', 'flex')
 })
 

@@ -1,7 +1,7 @@
 click('maisOpc', () => {
 	clearInterval(stopFocusTP)
 	hideId('inicio')
-	showId('opcoes', 'inline')
+	showId('opcoes', 'flex')
 	showId('controle', 'flex')
 	ajustarHora()
 		.then(() => controle())
