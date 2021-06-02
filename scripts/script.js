@@ -156,3 +156,23 @@ const focusTagTpTransp = () => {
 		}
 	}, 100)
 }
+
+var botoes = document.querySelectorAll('.botao-principal')
+var botoesArr = Array.prototype.slice.call(botoes)
+
+botoesArr.map(botao => {
+	botao.addEventListener('click', e => {
+		botoesArr.map(botao => botao.classList.remove('botaoAtivo'))
+		e.target.classList.add('botaoAtivo')
+	})
+})
+
+var botoes2 = document.querySelectorAll('.botao-secundario')
+var botoes2Arr = Array.prototype.slice.call(botoes2)
+
+botoes2Arr.map(botao => {
+	botao.addEventListener('click', e => {
+		botoes2Arr.map(botao => botao.classList.remove('botaoAtivo'))
+		e.target.classList.add('botaoAtivo')
+	})
+})

@@ -27,21 +27,19 @@
 				<option value="T-PAS">T-PAS</option>
 				<option value="FILA-CLA">FILA-CLA</option>
 			</select>
-			<button id="btnSelecionarPosto">Selecionar</button>
+			<button class="botao-principal" id="btnSelecionarPosto">Selecionar</button>
 		</div>
 		<div id="checarGerente">
 		</div>
 		<div id="principal">
-			<div class="pagina" id="inicio">
+			<div title="Aproxime o TP do leitor para iniciar o Registro." class="pagina" id="inicio">
 				<div id="leitor">
-					<h1>Início</h1>
-				<form autocomplete="off" id="formRFIDTP">
-					<fieldset title="Aproxime o TP do leitor para iniciar o Registro.">
-						<legend>Apresente TP</legend>
-						<label><input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/></label>
-					</fieldset>
-				</form><br>
-				<button id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
+					<h2>Apresente TP</h2>
+				<div autocomplete="off" id="formRFIDTP">
+						<div class="lds-ripple"><div></div><div></div></div>
+						<input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/>
+				</div>
+				<button class="botao-principal" id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 				</div>
 				<div id="grid-inicio">
 					<h3 class="hidden" title="Abaixo estão os TPs em uso: Em Verde até 2 dias e Em Vermelho mais de 2 dias">TPs em uso</h3>
@@ -55,29 +53,29 @@
 				<div id="idRetirar"></div>
 				<div id='divFormIDRetirar'>
 					<form autocomplete="off" id="formRFIDRetirar">
-						<fieldset>
+						
 							<legend>Apresente a TAG do usuário</legend>
 							<label><input type="password" name="tag" id="inputTagUsuario" size="10" maxlength="10" /></label>
-						</fieldset>
+						
 						<!--Botão que possibilita retirar sem tag-->
 					</form>
-					<button id="btnRetirar" title="Disponibiliza retiradada pelo empregado sem a Tag, utilizando Matrícula e Senha.">Retirar sem Tag</button>
+					<button class="botao-principal" id="btnRetirar" title="Disponibiliza retiradada pelo empregado sem a Tag, utilizando Matrícula e Senha.">Retirar sem Tag</button>
 				</div>
 				<!--Form abaixo contem o quadro onde se endtra com matrícula e senha; matrícula com 5 dígitos e 
 					senha com quatro dígitos.-->
 					<div id='divFormSenhaRetirar' class="pagina">
 						<form autocomplete="off" id="formSenhaRetirar">
-							<fieldset>
+							
 								<legend>Usuário</legend>
 								<input type="text" placeholder="Matrícula" id="inputMatrRetirar" size="10" maxlength="5"/> 
 								<input type="password" placeholder="Senha" name="pinRets" id="inputSenhaRetirar" size="10" maxlength="4"/>
-								<button class="hidden" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
-							</fieldset>
+								<button class="hidden botao-secundario" onclick="reload()" id="cancelaRetirar" title="Cancela">Cancelar</button>
+							
 						</form>
 						<br><br><br>
-						<button class="hidden" id="btnRetirarOutro">Escolher outro TP</button>
-						<button id = "utilizarTagRet" title="Possibilita retornar para o registro do usuário com Tag.">Retirar com Tag</button>
-						<button id="btnEsqueciRetirar">Esqueci a senha</button>
+						<button class="hidden botao-secundario" id="btnRetirarOutro">Escolher outro TP</button>
+						<button class="botao-secundario" id = "utilizarTagRet" title="Possibilita retornar para o registro do usuário com Tag.">Retirar com Tag</button>
+						<button class="botao-secundario" id="btnEsqueciRetirar">Esqueci a senha</button>
 						 </div>
 			</div>
 			<div class="pagina" id="devolver">
@@ -86,36 +84,36 @@
 				<div id="idTPDevolver"></div>
 				<div id="divFormRFIDDevolver">
 					<form autocomplete="off" id="formRFIDDevolver">
-						<fieldset>
+						
 							<legend>Apresente a TAG de gerente</legend>
 							<input type="password" name="tag" id="inputTagGerente" size="10" maxlength="10" />
-						</fieldset>
+						
 					</form>
-					<button id="btnDevolver">Devolver sem Tag</button>
-					<button id="btnEsqueciDevolver">Esqueci a senha</button>
+					<button class="botao-secundario" id="btnDevolver">Devolver sem Tag</button>
+					<button class="botao-secundario" id="btnEsqueciDevolver">Esqueci a senha</button>
 				</div>
 				<div id="divFormSenhaDevolver" class="pagina">
 					<form autocomplete="off" id="formSenhaDevolver">
-						<fieldset>
+						
 								<legend id="nomeDoGerente">Gerente</legend>
 								<input type="text" placeholder="Matrícula" id="inputMatrDevolver" size="10" maxlength="5"/><br>
 								<input type="password" placeholder="Senha" id="inputSenhaDevolver" size="10" maxlength="4" />
-								<button class="hidden" onclick="reload()" id="cancelaDevolver" title="Cancela">Cancelar</button>
-						</fieldset>
+								<button class="hidden botao-secundario" onclick="reload()" id="cancelaDevolver" title="Cancela">Cancelar</button>
+						
 					</form>
 						<br><br><br>
-						<button class="hidden" id="btnDevolverOutro">Escolher outro TP</button>
-						<button id = "utilizarTagDev" title="Possibilita retornar para o registro do usuário com Tag.">Devolver com Tag</button>
+						<button class="hidden botao-secundario" id="btnDevolverOutro">Escolher outro TP</button>
+						<button class="botao-secundario" id = "utilizarTagDev" title="Possibilita retornar para o registro do usuário com Tag.">Devolver com Tag</button>
 				</div>
 			</div>
 			<div class="menu" id="opcoes">
-				<button id="btnControle">Controle</button>
-				<button id="btnBusca">Busca</button> 	
-				<button id="btnTransporte">Transporte</button>
-				<button id="btnCadastro">Cadastro</button>
-				<button id="btnVoltar">Início</button>
-				<button id="falhaLeitor">Falha no leitor</button>
-				<button id="btnSenhas">Senhas</button>
+				<button class="botao-principal" id="btnControle">Controle</button>
+				<button class="botao-principal" id="btnBusca">Busca</button> 	
+				<button class="botao-principal" id="btnTransporte">Transporte</button>
+				<button class="botao-principal" id="btnCadastro">Cadastro</button>
+				<button class="botao-principal" id="btnVoltar">Início</button>
+				<button class="botao-principal" id="falhaLeitor">Falha no leitor</button>
+				<button class="botao-principal" id="btnSenhas">Senhas</button>
 			</div>
 			<div class="pagina" id="transporte">
 				<h1>Transporte</h1>
@@ -153,10 +151,10 @@
 			<div class="pagina" id="busca">
 				<h1>Busca</h1>
 				<div>
-					<button id="btnBuscaMatr">Matrícula</button>
-					<button id="btnBuscaData">Data</button>
-					<button id="btnBuscaTP">TP</button>
-					<button id="btnBuscaPosto">Posto</button>
+					<button class="botao-secundario" id="btnBuscaMatr">Matrícula</button>
+					<button class="botao-secundario" id="btnBuscaData">Data</button>
+					<button class="botao-secundario" id="btnBuscaTP">TP</button>
+					<button class="botao-secundario" id="btnBuscaPosto">Posto</button>
 				</div>
 				<div class="pagina" id="buscaMatr">
 					<form autocomplete="off" id="formBuscaMatr">
@@ -205,24 +203,24 @@
 			<div class="pagina" id="cadastro">
 				<h1>Cadastro</h1>
 				<div class="menu">
-					<button id="btnCadastroUsuario">Usuário</button>
-					<button id="btnCadastroTp">TP</button>
+					<button class="botao-secundario" id="btnCadastroUsuario">Usuário</button>
+					<button class="botao-secundario" id="btnCadastroTp">TP</button>
 				</div>
 				<div class="pagina" id="cadastroTp">
 					<div id="opcoesTP">
 						<h3>TP</h3>
-						<button id="btnAtualizarTP">Atualizar TP</button>
-						<button id="btnNovoTP">Novo TP</button>
+						<button class="botao-secundario" id="btnAtualizarTP">Atualizar TP</button>
+						<button class="botao-secundario" id="btnNovoTP">Novo TP</button>
 					</div>
 				</div>
 				<div class="menu-oculto" id="opcoesUsuario">
                     <h3>Usuário</h3>
 										<div class="menu">
-										<button id="btnAtualizarUsuario">Atualizar Cadastro</button>
-										<button id="btnNovoUsuario">Novo Cadastro</button>
+										<button class="botao-secundario" id="btnAtualizarUsuario">Atualizar Cadastro</button>
+										<button class="botao-secundario" id="btnNovoUsuario">Novo Cadastro</button>
 										</div>
 										<div style="margin-top: 35px;">
-											<fieldset class="hidden" id="divNovoUsuario">
+											<div class="hidden" id="divNovoUsuario">
 												<legend>Novo Usuário</legend>
 												
 													<form class="grid" autocomplete="off" id="formNovoUsuario">
@@ -246,24 +244,24 @@
 															<input type="submit" value="Cadastrar">
 													</form>
 								
-											</fieldset>
+												</div>
 										</div>
 											<div style="margin-top: 35px;">
-											<fieldset class="hidden" id="divAtualizarUsuario">
+											<div class="hidden" id="divAtualizarUsuario">
 												<legend>Atualizar Usuário</legend>
 													<form autocomplete="off" id="formAtualizarUsuario">
 														<h2 id='idEncontrado'></h2>
 															<label for="matricula">Matrícula</label>
 															<input type="text" name="matricula" placeholder="Matrícula" id="inputMatrAtualiza" size=7 maxlength="5"><br>
-															<button id='lerMatr'>Ir</button>
+															<button class="botao-terciario"  id='lerMatr'>Ir</button>
 															<input class='hidden' type="password" id="inputTagAtualiza">
 														</form>
 														<div id='botoesTagGer' class='hidden'>
-															<button id='trocaTag'>TAG</button>
-															<button id='trocaGerente'>Função</button>
+															<button class="botao-terciario"  id='trocaTag'>TAG</button>
+															<button class="botao-terciario"  id='trocaGerente'>Função</button>
 														</div>
 								
-											</fieldset>
+													</div>
 										</div>
 				
                 <div id="divAtualizarCadastro"></div>
@@ -272,19 +270,19 @@
 			</div>
 			<div class="pagina" id="senhas">
 				<div>
-					<button onclick="abrirEsqueci()">Esqueci a senha</button>
-					<button onclick="abrirAtualiza()">Atualizar a senha</button>
+					<button class="botao-secundario" id="btnEsqueci" onclick="abrirEsqueci()">Esqueci a senha</button>
+					<button class="botao-secundario" onclick="abrirAtualiza()">Atualizar a senha</button>
 				</div>
 				<div class="pagina" id="esqueciSenha">
 					<div >
 						<h3 id="idEsqueci"></h3>
 						<input autocomplete="off" placeholder="Matrícula" maxlength="5" type="text" id="matriculaEsqueci">
-						<button id="btnEnviarEqueci">Enviar e-mail</button>
+						<button  class="botao-terciario"  id="btnEnviarEqueci">Enviar e-mail</button>
 					</div>
 				</div>
 				<div class="pagina" id="atualizarSenha">
 					<div id="login">
-						<fieldset>
+						
 							<legend>Login</legend>
 								<h3 id="idLogin"></h3>
 								<form class="grid" autocomplete="off" id="login">
@@ -294,10 +292,10 @@
 										<label for="senha">Senha</label>
 												<input type="password" name="senha" maxlength="4" placeholder="Senha" id="senhaLogin" size="15" width="4" title="Digite a senha com 4 dígitos">
 								</form>
-						</fieldset>
+						
 					</div>
 					<div class="hidden" id="divNovaSenha" style="margin-top: 35px;">
-						<fieldset>
+						
 							<legend>Nova Senha</legend>
 								<h3 id="idNovaSenha"></h3>
 								<form class="grid" autocomplete="off" id="formNovaSenha">
@@ -308,7 +306,7 @@
 												<label for="mostrarSenha">Mostrar Senha</label>
 												<input type="checkbox" onclick="mostrarOcultar()" name="mostraSenha" id="mostraSenha">																	
 								</form>
-						</fieldset>
+						
 					</div>
 				</div>
 			</div>

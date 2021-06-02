@@ -182,4 +182,7 @@ click('btnEsqueciRetirar', () => {
 	showId('opcoes', 'flex')
 	showId('senhas', 'flex')
 	showId('esqueciSenha', 'flex')
+	document.getElementById('btnEsqueci').classList.add('botaoAtivo')
+	document.getElementById('falhaLeitor').classList.remove('botaoAtivo')
+	document.getElementById('btnSenhas').classList.add('botaoAtivo')
 })

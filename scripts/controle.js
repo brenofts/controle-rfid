@@ -1,4 +1,5 @@
 click('maisOpc', () => {
+	document.getElementById('btnControle').classList.add('botaoAtivo')
 	clearInterval(stopFocusTP)
 	hideId('inicio')
 	showId('opcoes', 'flex')
