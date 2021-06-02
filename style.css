@@ -302,20 +302,27 @@ input {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    padding: 2vh 0 2vh 0;
 }
 
 .grid-container-inicio {
     display: grid;
     justify-content: space-evenly;
-    grid-template-columns: 20%  20%  20%  20%  20% ;
+    grid-template-columns:  minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px);
     font-size: 14pt;
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 5px;
 }
 
 [class*='item-inicio'] {
     border: 1px solid rgba(0, 0, 0, 0.8);   
     text-align: center;
     overflow-wrap: break-word;
-    margin: 5px;
+    padding: 5px 8px 5px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 [class*='item-inicio']:hover {
