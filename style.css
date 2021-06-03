@@ -226,6 +226,13 @@ input {
     justify-content: center;
     margin-bottom: 2em;
 }
+.menu1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 2em;
+}
 
 .menu-oculto {
     display: none;
@@ -290,7 +297,17 @@ input {
     align-items: center;
     text-align: center;
 }
-
+.leitor {
+    display:none;
+    width:60%;
+    height:65vh;
+    background-color: darkorange;
+    padding: 5px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
 #grid-inicio {
     border: solid rgb(228, 228, 228) 1px;
     background-color: whitesmoke;
@@ -306,27 +323,29 @@ input {
 }
 
 .grid-container-inicio {
-    display: grid;
+    display: none;
     justify-content: space-evenly;
     grid-template-columns:  minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px) minmax(80px, 220px);
     font-size: 14pt;
     row-gap: 5px;
     column-gap: 5px;
     padding: 5px;
+    animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 [class*='item-inicio'] {
-    border: 1px solid rgba(0, 0, 0, 0.8);   
+    border-radius: 3px;
     text-align: center;
     overflow-wrap: break-word;
     padding: 5px 8px 5px 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-[class*='item-inicio']:hover {
-    color: white
 }
 
 .item-inicio-red{
@@ -339,7 +358,7 @@ input {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
     padding: 10px;
 }
 
@@ -360,6 +379,7 @@ input {
 
 .grid-item-devolvido {
     background-color: blue;
+    color:white;
 }
 .grid-item-emuso {
     background-color: yellow;
@@ -371,4 +391,53 @@ input {
 
 .hidden, .pagina {
     display: none;
+}
+
+
+
+.secundario{
+    display: none;
+    flex-direction: column;
+    justify-content: initial;
+    align-items: center;
+    text-align: center;
+    border:1px solid LightGray;
+    background-color: ghostwhite;
+    width: 90%;
+    height: 70vh;
+}
+#h1Busca{
+    margin:4px;
+}
+#btnsBusca{
+    margin:15px;
+}
+#buscaPosto{
+    flex-direction:column;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+#idSelPosto{
+    margin: 20px;
+}
+.btnBuscar{
+    background-color: #173d72;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: #173d72 solid 2px;
+    font-size: 12pt;
+    margin: 0.1em;
+}
+.btnBuscar:hover{
+    background-color: #173d72c0
+}
+.botao-terciario{
+    background-color: #173d72;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    border: #173d72 solid 2px;
+    font-size: 12pt;
+    margin: 0.1em;
 }

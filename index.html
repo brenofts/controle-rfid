@@ -41,19 +41,18 @@
 				</div>
 				<button class="botao-principal" id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 				</div>
-				<div id="grid-inicio">
-					<h3 class="hidden" title="Abaixo estão os TPs em uso: Em Verde até 2 dias e Em Vermelho mais de 2 dias">TPs em uso</h3>
+				<div id="grid-inicio" title="Em verde até 2 dias e em vermelho mais de 2 dias">
 					<div id="tpsEmUso" class="grid-container-inicio">
 				</div>
 				</div>
 			</div>
-			<div class="pagina" id="retirar">
+			<div class="leitor" id="retirar">
 				<h1>Retirar</h1>
 				<div id="numTPRetirar"></div>
 				<div id="idRetirar"></div>
 				<div id='divFormIDRetirar'>
 					<form autocomplete="off" id="formRFIDRetirar">
-						
+							<div class="lds-ripple"><div></div><div></div></div>
 							<legend>Apresente a TAG do usuário</legend>
 							<label><input type="password" name="tag" id="inputTagUsuario" size="10" maxlength="10" /></label>
 						
@@ -78,13 +77,13 @@
 						<button class="botao-secundario" id="btnEsqueciRetirar">Esqueci a senha</button>
 						 </div>
 			</div>
-			<div class="pagina" id="devolver">
+			<div class="leitor" id="devolver">
 				<h1>Devolver</h1>
 				<div id="numTPDevolver"></div>
 				<div id="idTPDevolver"></div>
 				<div id="divFormRFIDDevolver">
 					<form autocomplete="off" id="formRFIDDevolver">
-						
+							<div class="lds-ripple"><div></div><div></div></div>
 							<legend>Apresente a TAG de gerente</legend>
 							<input type="password" name="tag" id="inputTagGerente" size="10" maxlength="10" />
 						
@@ -115,7 +114,7 @@
 				<button class="botao-principal" id="falhaLeitor">Falha no leitor</button>
 				<button class="botao-principal" id="btnSenhas">Senhas</button>
 			</div>
-			<div class="pagina" id="transporte">
+			<div class="secundario" id="transporte">
 				<h1>Transporte</h1>
 				<h3 id="idTransporte"></h3>
 				<label>Apresente TP</label>
@@ -148,40 +147,40 @@
 					<tbody id="bodyControle"></tbody>
 				</table>
 			</div>
-			<div class="pagina" id="busca">
-				<h1>Busca</h1>
-				<div>
+			<div class="secundario" id="busca">
+				<h1 id="h1Busca">Busca</h1>
+				<div id="btnsBusca">
 					<button class="botao-secundario" id="btnBuscaMatr">Matrícula</button>
 					<button class="botao-secundario" id="btnBuscaData">Data</button>
 					<button class="botao-secundario" id="btnBuscaTP">TP</button>
 					<button class="botao-secundario" id="btnBuscaPosto">Posto</button>
 				</div>
-				<div class="pagina" id="buscaMatr">
+				<div class="pagina" id="buscaMatr" title="Digite a matrícula para visualizar todos os registros desse empregado">
 					<form autocomplete="off" id="formBuscaMatr">
 						<input type="text" placeholder="Matrícula" name="matricula" id="inputMatrBuscar" />
-						<input type="submit" value="Buscar" id="btnBuscarMatr" />
+						<input class="btnBuscar" type="submit" value="Buscar" id="btnBuscarMatr" />
 					</form>
 				</div>
 				<div class="pagina" id="buscaData">
-					<form autocomplete="off" id="formBuscaData">
+					<form autocomplete="off" id="formBuscaData" title="Retorna todos os registros do dia selecionado na 'Data Inicial' ou no período, havendo seleção da 'Data Inicial' e 'Data Final'. " >
 						<label for="inputDataInicial">Data Inicial</label>
 						<input id="inputDataInicial" type="date" />
 						<label id='lblDataFinal'for="inputDataFinal" class="hidden">Data Final</label>
 						<input  id="inputDataFinal" class="hidden" type="date" />
-						<input class="hidden" type="submit" id="btnBuscarData" value="Buscar" />
+						<input class="hidden btnBuscar" type="submit" id="btnBuscarData" value="Buscar" />
 					</form>
 				</div>
 				<div class="pagina" id="buscaTP">
-					<h2 title = "Escolha o TP no qual queira ver o Histórico de Registros.">Busca por TP</h2>
+					<h2 title = "Escolha o TP no qual queira ver o Histórico de Registros">Busca por TP</h2>
 					<div class="grid-container" id="tabelaBuscaTPs"></div>
 				</div>
-				<div class="pagina" id="buscaPosto">
-					<h2>Selecione o Posto</h2>
+				<div class="pagina" id="buscaPosto" title="Retorna todos os registros do posto">
+					<h2 id="idSelPosto">Selecione o Posto</h2>
 					<select name="buscaTp" id="selBuscaPosto">
 							<option value="T-PAS">T-PAS</option>
 							<option value="T-PAC">T-PAC</option>
 							<option value="FILA-CLA" selected>FILA-CLA</option>
-					</select> <input type="submit" id="btnBuscarPosto" value="Buscar" />
+					</select> <input class="btnBuscar" type="submit" id="btnBuscarPosto" value="Buscar" />
 					
 			</div>
 			</div>
@@ -200,9 +199,9 @@
 					<tbody id="bodyTabela"></tbody>
 				</table>
 			</div>
-			<div class="pagina" id="cadastro">
+			<div class="secundario" id="cadastro">
 				<h1>Cadastro</h1>
-				<div class="menu">
+				<div class="menu1">
 					<button class="botao-secundario" id="btnCadastroUsuario">Usuário</button>
 					<button class="botao-secundario" id="btnCadastroTp">TP</button>
 				</div>
@@ -215,7 +214,7 @@
 				</div>
 				<div class="menu-oculto" id="opcoesUsuario">
                     <h3>Usuário</h3>
-										<div class="menu">
+										<div class="menu1">
 										<button class="botao-secundario" id="btnAtualizarUsuario">Atualizar Cadastro</button>
 										<button class="botao-secundario" id="btnNovoUsuario">Novo Cadastro</button>
 										</div>
@@ -241,7 +240,7 @@
 																	</select>
 															
 															<p></p>
-															<input type="submit" value="Cadastrar">
+															<input class="btnBuscar" type="submit" value="Cadastrar">
 													</form>
 								
 												</div>
@@ -268,7 +267,7 @@
 			</div>
 
 			</div>
-			<div class="pagina" id="senhas">
+			<div class="secundario" id="senhas">
 				<div>
 					<button class="botao-secundario" id="btnEsqueci" onclick="abrirEsqueci()">Esqueci a senha</button>
 					<button class="botao-secundario" onclick="abrirAtualiza()">Atualizar a senha</button>
@@ -310,7 +309,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="pagina" id="selecionarTP">
+			<div class="secundario" id="selecionarTP">
 			<h1>Selecione o TP</h1>
 			<div class="grid-container" id="tabelaTPs">
 

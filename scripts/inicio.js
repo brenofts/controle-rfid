@@ -161,7 +161,7 @@ const verificarGerente = (action) => {
 							gerente = usuarioEncontrado.id
 							matricula = usuarioEncontrado.matricula
 							checarGerente.innerHTML = ''
-							showId('principal', 'block')
+							showId('principal', 'flex')
 							switch (action) {
 								case 'transporte':
 									hideIds(['controle', 'busca', 'cadastro', 'selecionarTP', 'opcoes', 'senhas'])
@@ -228,6 +228,7 @@ const mostrarTPs = () => {
 			count == 0
 				? (document.getElementById('tpsEmUso').innerHTML = `<p>Não constam TPs em uso</p>`)
 				: console.log('TPs em uso:', count)
+			showId('tpsEmUso', 'grid')
 		})
 	}, 5000)
 }
