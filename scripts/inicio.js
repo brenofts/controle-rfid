@@ -3,11 +3,11 @@ function verificarConexao() {
 	setTimeout(() => {
 		db.ref('.info/connected').on('value', snap => {
 			if (snap.val() === false) {
-				document.getElementById("fav").href = "imagens/alert.gif"
+				document.getElementById('fav').href = 'imagens/alert.gif'
 				alert('Verificar conexão de Internet')
 				reload()
 			} else {
-				document.getElementById("fav").href = "imagens/sepura.png"
+				document.getElementById('fav').href = 'imagens/sepura.png'
 				console.log('O pai tá on')
 				showId('inicio', 'flex')
 				hideId('conectando')
@@ -77,14 +77,13 @@ function verificarStatus() {
 					numTPDevolver.innerText = tp
 					inputTagGerente.focus()
 					focusGerente()
-					
-				}, 100);
+				}, 100)
 			} else {
 				if (status == 'Bloqueado') {
 					setTimeout(() => {
 						alert('TP ' + tp + ' bloqueado')
 						reload()
-					}, 100);
+					}, 100)
 				}
 			}
 		}
@@ -113,12 +112,14 @@ click('btnVoltar', () => reload())
 // db.ref('usuarios/joao_esteves').set(joao)
 
 click('btnSelecionarPosto', () => {
-	if (selectPosto.value != "pst"){
+	if (selectPosto.value != 'pst') {
 		localStorage.setItem('posto', selectPosto.value)
 		document.getElementById('nomePosto').innerText = 'OGCOT | ' + localStorage.getItem('posto')
 		showId('conectando', 'flex')
 		verificarPosto()
-	} else {alert("Selecione um posto de trabalho válido!")}
+	} else {
+		alert('Selecione um posto de trabalho válido!')
+	}
 })
 
 var verificarPosto = () => {
@@ -136,7 +137,7 @@ var verificarPosto = () => {
 
 verificarPosto()
 
-const verificarGerente = (action) => {
+const verificarGerente = action => {
 	hideId('principal')
 	tpsIncluidos = []
 	checarGerente.innerHTML = `
@@ -165,7 +166,7 @@ const verificarGerente = (action) => {
 							switch (action) {
 								case 'transporte':
 									hideIds(['controle', 'busca', 'cadastro', 'selecionarTP', 'opcoes', 'senhas'])
-  								showId('transporte', 'flex')
+									showId('transporte', 'flex')
 									idTransporte.innerHTML = gerente
 									focusTagTpTransp()
 									break
@@ -219,7 +220,14 @@ const mostrarTPs = () => {
 				switch (tp.status.status) {
 					case 'Em uso':
 						count++
-						dias > 2 ? (cssClass = 'item-inicio-red') : (cssClass = 'item-inicio-green')
+						if (dias <= 1) {
+							cssClass = 'item-inicio-green'
+						} else if (dias > 1 && dias <= 3) {
+							cssClass = 'item-inicio-yellow'
+						} else if (dias > 3 ) {
+							cssClass = 'item-inicio-red'
+						}
+						//dias > 2 ? (cssClass = 'item-inicio-red') : (cssClass = 'item-inicio-green')
 						var gridItem = `<div title="${title}" class="${cssClass}"><div>${tp.tp}</div><div>${tp.status.id}</div></div>`
 						document.getElementById('tpsEmUso').innerHTML += gridItem
 						break
