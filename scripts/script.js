@@ -51,7 +51,13 @@ const ids = [
 	'idEncontrado',
 	'inputTagAtualiza',
 	'matriculaEsqueci',
-	'matriculaLogin'
+	'matriculaLogin',
+	'btnObsTP',
+	'divObsTp',
+	'inputObsNumTP',
+	'divBotoesObs',
+	'btnMostrarObsTP',
+	'btnEscreverObsTP'
 ]
 
 const createVariables = () => {

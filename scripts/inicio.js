@@ -140,9 +140,11 @@ verificarPosto()
 const verificarGerente = action => {
 	hideId('principal')
 	tpsIncluidos = []
-	checarGerente.innerHTML = `
+	showId('checarGerente', 'flex')
+	checarGerente.classList.remove('hidden')
+	checarGerente.innerHTML += `
     <h4>Apresente credencial de Gerente</h4>
-    <input type="password" name="" id="verificarTAGGerente">
+    <input class="input-hidden" type="password" name="" id="verificarTAGGerente">
     `
 	var tagGerente = document.getElementById('verificarTAGGerente')
 	focusVerificarGerente()

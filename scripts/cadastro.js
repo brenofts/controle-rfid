@@ -201,3 +201,29 @@ function escondeBotoes() {
 	}, 300)
 }
 
+//OBSERVAÇÕES TP: Permite ler se existe alguma observação ou escrever alguma observação sobre as condições do aparelho.
+
+click('btnObsTP', () =>{
+	showId("divObsTp", "flex")
+})
+
+inputObsNumTP.addEventListener("input",()=>{
+	if (inputObsNumTP.value.length == 5){
+		var tpObs = inputObsNumTP.value
+		db.ref('tps')
+		.once('value')
+		.then(snap => {
+			var listaTp = Object.values(snap.val())
+			function numTp(n) {
+			return n.tp == tpObs
+			}
+			var tpEncontrado = listaTp.find(numTp)
+			console.log(tpEncontrado)
+			if (tpEncontrado != undefined) {
+				hideId('inputObsNumTP')
+				showId('divBotoesObs', 'flex')
+				// parei aqui
+			} else {alert("TP: "+ tpObs + ", não encontrado.")}
+		})
+	} 
+})
