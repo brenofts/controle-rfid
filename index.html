@@ -30,16 +30,17 @@
 			<button class="botao-principal" id="btnSelecionarPosto">Selecionar</button>
 		</div>
 		<div id="checarGerente">
+			<div class="lds-ripple"><div></div><div></div></div>
 		</div>
 		<div id="principal">
 			<div class="menu" id="opcoes">
+				<button class="botao-principal" id="btnVoltar">Início</button>
 				<button class="botao-principal" id="btnControle">Controle</button>
 				<button class="botao-principal" id="btnBusca">Busca</button> 	
 				<button class="botao-principal" id="btnTransporte">Transporte</button>
 				<button class="botao-principal" id="btnCadastro">Cadastro</button>
-				<button class="botao-principal" id="btnVoltar">Início</button>
-				<button class="botao-principal" id="falhaLeitor">Falha no leitor</button>
 				<button class="botao-principal" id="btnSenhas">Senhas</button>
+				<button class="botao-principal" id="falhaLeitor">Falha no leitor</button>
 			</div>
 			<div class="paginas">
 				<div title="Aproxime o TP do leitor para iniciar o Registro." class="pagina" id="inicio">
@@ -47,7 +48,7 @@
 						<h2>Apresente TP</h2>
 					<div autocomplete="off" id="formRFIDTP">
 							<div class="lds-ripple"><div></div><div></div></div>
-							<input type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/>
+							<input class="input-hidden" type="password" name="tag" id="inputTagTP" size=7 maxlength="10" title="Leitura RFID" onselect="notAllowed()"/>
 					</div>
 					<button class="botao-principal" id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 					</div>
@@ -64,7 +65,7 @@
 						<form autocomplete="off" id="formRFIDRetirar">
 								<div class="lds-ripple"><div></div><div></div></div>
 								<legend>Apresente a TAG do usuário</legend>
-								<label><input type="password" name="tag" id="inputTagUsuario" size="10" maxlength="10" /></label>
+								<label><input class="input-hidden" type="password" name="tag" id="inputTagUsuario" size="10" maxlength="10" /></label>
 							
 							<!--Botão que possibilita retirar sem tag-->
 						</form>
@@ -95,7 +96,7 @@
 						<form autocomplete="off" id="formRFIDDevolver">
 								<div class="lds-ripple"><div></div><div></div></div>
 								<legend>Apresente a TAG de gerente</legend>
-								<input type="password" name="tag" id="inputTagGerente" size="10" maxlength="10" />
+								<input class="input-hidden" type="password" name="tag" id="inputTagGerente" size="10" maxlength="10" />
 							
 						</form>
 						<button class="botao-secundario" id="btnDevolver">Devolver sem Tag</button>
@@ -118,9 +119,10 @@
 				<div class="secundario" id="transporte">
 					<h1>Transporte</h1>
 					<h3 id="idTransporte"></h3>
+					<div class="lds-ripple"><div></div><div></div></div>
 					<label>Apresente TP</label>
 					<form autocomplete="off" id="az">
-						<input type="password" name="tagTpTransp" id="inputTagTPTransp">
+						<input  class="input-hidden" type="password" name="tagTpTransp" id="inputTagTPTransp">
 					</form>
 					<div class="hidden"  id="divTPsIncluidos">
 						<h3>TPs incluídos<span id="countIncluidos"></span></h3>
@@ -240,6 +242,7 @@
 																		<input type="text" name="id" placeholder="login.sei" id="idNovo" size="15">
 																
 																<label for="tag">TAG RFID</label>
+																<h3>Apresente a nova TAG no leitor</h3>
 																<input type="password" placeholder="Apresente no leitor" name="tag" id="tagNovo" size=7>
 															
 																<label for="cargo">Cargo</label>
@@ -263,7 +266,7 @@
 																<label for="matricula">Matrícula</label>
 																<input type="text" name="matricula" placeholder="Matrícula" id="inputMatrAtualiza" size=7 maxlength="5"><br>
 																<button class="botao-terciario"  id='lerMatr'>Ir</button>
-																<input class='hidden' type="password" id="inputTagAtualiza">
+																<input  class="input-hidden hidden"  type="password" id="inputTagAtualiza">
 															</form>
 															<div id='botoesTagGer' class='hidden'>
 																<button class="botao-terciario"  id='trocaTag'>TAG</button>
