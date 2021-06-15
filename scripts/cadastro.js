@@ -205,9 +205,13 @@ function escondeBotoes() {
 
 click('btnObsTP', () =>{
 	showId("divObsTp", "flex")
+	inputObsNumTP.focus()
 })
 
+var registroObs = {}
+
 inputObsNumTP.addEventListener("input",()=>{
+	registroObs['gerente'] = gerente
 	if (inputObsNumTP.value.length == 5){
 		var tpObs = inputObsNumTP.value
 		db.ref('tps')
@@ -218,12 +222,107 @@ inputObsNumTP.addEventListener("input",()=>{
 			return n.tp == tpObs
 			}
 			var tpEncontrado = listaTp.find(numTp)
-			console.log(tpEncontrado)
+			var ultimaData = new Date(tpEncontrado.status.data).toLocaleString()
+			registroObs['ultimo_registro'] = tpEncontrado.status
+			tp = tpEncontrado.tp
+			console.log(registroObs)
 			if (tpEncontrado != undefined) {
+				document.getElementById("mostraNumTPobs").innerHTML = "TP: "+ tpObs
+				document.getElementById('infoTPobs').innerHTML = `
+					<p>Patrimônio: ${tpEncontrado.pat}</p>
+					<p>Informações do último registro:</p>
+					<p>Data: ${ultimaData}</p>
+					<p>Posto: ${tpEncontrado.status.posto}</p>
+					<p>Usuário: ${tpEncontrado.status.id}</p>
+					<p>Status: ${tpEncontrado.status.status}</p>
+					<p>Gerente: ${tpEncontrado.status.gerente}</p>
+				`
+				if (tpEncontrado.status.status == 'Em uso'){
+						if (confirm("O TP " + tpEncontrado.tp + " encontra-se registrado para o usuário " + tpEncontrado.status.id + ". Deseja realmente continuar?" )){
+							null
+						} else {
+							reload()
+						}
+				} else if(tpEncontrado.status.status == 'Bloqueado') {
+					document.getElementsByName('bloquear')[1].checked = true
+					document.getElementById('opcoesBloquear').style.display = 'none'
+				}
 				hideId('inputObsNumTP')
 				showId('divBotoesObs', 'flex')
 				// parei aqui
-			} else {alert("TP: "+ tpObs + ", não encontrado.")}
+			} else {
+				alert("TP: "+ tpObs + ", não encontrado.")
+				inputObsNumTP.value = ""
+			}
 		})
 	} 
+})
+
+var bloquear = false
+
+document.getElementById('escreveObs').addEventListener('click', () => {
+	var observacoes = document.getElementById('inputObservacao').value
+	registroObs['obs'] = observacoes
+	if (observacoes.length >= 20) {
+		if (document.getElementsByName('bloquear')[0].checked == true) {
+			registroObs['bloquear'] = 'sim'
+			bloquear = true
+			registrarObs()
+		} else if (document.getElementsByName('bloquear')[1].checked == true) {
+				registroObs['bloquear'] = 'nao'
+				bloquear = false
+				registrarObs()
+		} else if (document.getElementsByName('bloquear')[0].checked == false && document.getElementsByName('bloquear')[1].checked == false ){
+			alert('O campo "Bloquear?" deve ser marcado')
+		}
+	} else {
+		alert('Preencha o campo de observações com pelo menos 20 caracteres')
+	}
+})
+
+function registrarObs() {
+	ajustarHora().then(() => {
+		registroObs['data'] = new Date().getTime() + diferencaHora
+		registroObs['posto'] = posto
+		if (bloquear) {
+			var updates = {}
+			var registro = {
+				status: 'Bloqueado',
+				id: '-',
+				tp: tp,
+				posto: posto,
+				gerente: gerente,
+				data: new Date().getTime() + diferencaHora,
+			}
+			chave = db.ref().child('tps').push().key
+
+			updates['/tps/' + tp + '/status/'] = registro
+			updates['/tps/' + tp + '/obs/' + chave] = registroObs
+
+			return db.ref().update(updates).then(() => {
+				alert('Observação registrada com sucesso. O TP ' + tp + ' está bloqueado para novos registros')
+				reload()
+			}).catch(e => {
+				alert(e.message)
+				reload()
+			})
+		} else {
+			chave = db.ref().child('tps').push().key
+			db.ref('tps/' + tp + '/obs/' + chave).set(registroObs).then(() => {
+				alert('Observação registrada com sucesso')
+				reload()
+			}).catch(e => {
+				alert(e.message)
+				reload()
+			})
+		}
+	}).catch(e => {
+		alert(e)
+		reload()
+	})
+}
+
+click('btnEscreverObsTP', () => {
+	showId("divEscreveObs","flex")
+	hideId('divBotoesObs')
 })

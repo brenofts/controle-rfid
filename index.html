@@ -216,10 +216,31 @@
 							<button class="botao-secundario" id="btnObsTP">Observações TP</button>
 							<div class="terciario" id="divObsTp">
 								<h3>Observações</h3>
+								<h3 id="mostraNumTPobs"></h3>
 								<input autocomplete="off" width="100%" size="30" placeholder="Digite aqui o número do TP"  id="inputObsNumTP" title="Digite a numeração completa do TP, com 5 dígitos" maxlength=5>
 								<div class="terciario" id="divBotoesObs">
-								<button class="botão-secundario" id="btnMostrarObsTP" title="Clique para VISUALIZAR as observações do aparelho">Mostrar Observações</button>
-								<button class="botão-secundario" id="btnEscreverObsTP" title="Clique para ESCREVER as observações do aparelho">Escrever Observações</button>
+								<button class="botao-secundario" id="btnMostrarObsTP" title="Clique para VISUALIZAR as observações do aparelho">Mostrar Observações</button>
+								<button class="botao-secundario" id="btnEscreverObsTP" title="Clique para ESCREVER as observações do aparelho">Escrever Observações</button>
+								</div>
+								<div class="terciario" id="divEscreveObs">
+									<div id="infoTPobs"></div>
+								<textarea autocomplete="off" width="40vw" height="50vh"  placeholder="Digite aqui a observação a ser Registrada: máximo de 1000 caracteres" id="inputObservacao" maxlength=1000></textarea>
+								<div id="opcoesBloquear" title="Bloqueia o TP para futuros registros.">
+								<form>
+									<label>Bloquear TP?</label>
+									<label><input type="radio" name="bloquear" value="sim"> Sim </label>
+									<label><input type="radio" name="bloquear" value="nao"> Não </label>
+									
+								</form>
+								</div>
+								
+								<!-- <select id="bloquearTP">
+								<option value="Bloqueado">Bloquear</option>
+								<option value="Devolvido">Desbloquear</option>
+								</select> -->
+								<button class="botao-secundario" id="escreveObs" title="Clique para efetivar o Registro da Observação">Enviar</button>
+								</div>
+								<div class="terciario" id="divLerObs">
 								</div>
 							</div>
 						</div>
