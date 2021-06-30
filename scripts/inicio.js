@@ -136,13 +136,13 @@ var verificarPosto = () => {
 }
 
 verificarPosto()
-
+var toc = 0
 const verificarGerente = action => {
 	hideId('principal')
 	tpsIncluidos = []
 	showId('checarGerente', 'flex')
-	checarGerente.classList.remove('hidden')
-	checarGerente.innerHTML += `
+	// checarGerente.classList.remove('hidden')
+	inputChecarGerente.innerHTML += `
     <h4>Apresente credencial de Gerente</h4>
     <input class="input-hidden" type="password" name="" id="verificarTAGGerente">
     `
@@ -163,7 +163,8 @@ const verificarGerente = action => {
 						if (ehGerente) {
 							gerente = usuarioEncontrado.id
 							matricula = usuarioEncontrado.matricula
-							checarGerente.innerHTML = ''
+							inputChecarGerente.innerHTML = ''
+							hideId('checarGerente')
 							showId('principal', 'flex')
 							switch (action) {
 								case 'transporte':
@@ -179,7 +180,11 @@ const verificarGerente = action => {
 									break
 								default:
 									break
-							}
+							}	
+							// setTimeout(()=>{
+							// 	reload() 
+							// },90050)
+							//sessao()
 							clearInterval(stopFocusVerificarGerente)
 						} else {
 							alert('Operação autorizada somente para gerentes')
@@ -192,6 +197,23 @@ const verificarGerente = action => {
 				})
 		}
 	})
+}
+
+const sessao = () => {
+	qualquercoisa = qualquercoisa + 1
+	if (qualquercoisa == 1){
+		var tempo = 100
+		showId('contador', 'flex')
+		contador.children[0].innerHTML = `<strong>${gerente}</strong>`
+		contador.children[2].innerText = tempo + 's'
+		setInterval(() => {
+			tempo = tempo - 1
+			contador.children[2].innerText = tempo + 's'
+			if (tempo == 0) {
+				reload()
+			}
+		}, 1000);
+	} else {console.log("qualquercoisa diferente de 1")}
 }
 
 const showAlert = message => {

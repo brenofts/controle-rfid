@@ -57,7 +57,14 @@ const ids = [
 	'inputObsNumTP',
 	'divBotoesObs',
 	'btnMostrarObsTP',
-	'btnEscreverObsTP'
+	'btnEscreverObsTP',
+	'btnMostrarObsTP',
+	'divMostrarObs',
+	'divLerObs',
+	'btnVoltarObsTp',
+	'inputChecarGerente',
+	'divTagAtualiza',
+	'contador'
 ]
 
 const createVariables = () => {
@@ -76,6 +83,7 @@ const createVariables = () => {
 createVariables()
 
 // variáveis que serão úteis para os registros
+var qualquercoisa = 0
 var dataTransporte, tituloImpressao
 var retirarMatricula, retirarSenha, devolverMatricula, devolverSenha
 var tp, id, matricula, status, gerente, posto, email, pin

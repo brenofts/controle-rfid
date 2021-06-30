@@ -111,6 +111,8 @@ inputSenhaDevolver.addEventListener('input',() => {
 // }
 
 function devolver(i, m, t, p, g) {
+	chave = db.ref().child('historico').push().key
+	
 	var registro = {
 		status: 'Devolvido',
 		id: i,
@@ -119,9 +121,9 @@ function devolver(i, m, t, p, g) {
 		posto: p,
 		gerente: g,
 		data: new Date().getTime() + diferencaHora,
+		key: chave
 	}
 
-	chave = db.ref().child('historico').push().key
 	// cria uma variável vazia do tipo objeto
 	var updates = {}
 	// cria um item nesse objeto updates[item] = "valor do item"

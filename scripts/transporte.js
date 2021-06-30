@@ -78,16 +78,19 @@ const transportar = () => {
     updates['/tps/' + item.tp + '/status'] = item
     tpsEmTransporte.push(item.tp)
   })
+  
+  chave = db.ref().child('historico').push().key
+  
   var registro = {
     status: 'Transporte',
 		id: gerente,
 		matricula: matricula,
 		tp: tpsEmTransporte.toString(),
 		posto: posto,
-		data: tpsIncluidos[0].data
+		data: tpsIncluidos[0].data,
+    key: chave
 	}
 
-  chave = db.ref().child('historico').push().key
   
   updates['/usuarios/' + gerente.replace('.', '_') + '/transporte'] = tpsEmTransporte.toString()
   updates['/historico/' + chave] = registro

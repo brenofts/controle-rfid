@@ -1,6 +1,8 @@
 click('btnSenhas', () => {
   hideIds(['busca', 'controle', 'transporte', 'cadastro', 'selecionarTP'])
   showId('senhas', 'flex')
+  gerente="Atenção!! "
+  sessao()
 })
 
 function abrirEsqueci() {
@@ -10,9 +12,10 @@ function abrirEsqueci() {
 function abrirAtualiza(){
   showId('atualizarSenha','flex')
   hideId('esqueciSenha')
+  matriculaLogin.focus()
 }
 
-
+// CONFIRMAR ENVIO DE E-MAIL PARA CRIAR NOVA SENHA --- ESQUECI A SENHA
 click('btnEnviarEqueci', () => {
   if (matriculaEsqueci.value.length > 2) {
     matricula = matriculaEsqueci.value
@@ -49,6 +52,7 @@ click('btnEnviarEqueci', () => {
   }
 })
 
+// ALTERA O TIPO DO INPUT PARA PASSWORD/TEXT
 function mostrarOcultar() {
   var comp1 = document.getElementById("pinNovo1")
   var comp = document.getElementById("pinNovo")
@@ -60,6 +64,8 @@ function mostrarOcultar() {
   comp1.type="password"
   }
 }
+
+// LOGIN PARA ATUALIZAÇÃO DE SENHA -- BUSCA A PARTIR DE DOIS DIGITOS
 
 document.getElementById('senhaLogin').addEventListener('focus',()=>{
   if (matriculaLogin.value.length > 2) {
@@ -82,6 +88,8 @@ document.getElementById('senhaLogin').addEventListener('focus',()=>{
   }
 })
 
+// CONFERE A SENHA PARA O LOGIN -- ATUALIZAÇÃO DE SENHA
+
 document.getElementById('senhaLogin').addEventListener('input', (e) => {
   var inputValue = e.target.value
   if (inputValue.length == 4) {
@@ -90,9 +98,10 @@ document.getElementById('senhaLogin').addEventListener('input', (e) => {
       var encontrarUsuario = item => item.matricula == matricula
       var usuarioEncontrado = resultado.find(encontrarUsuario)
       if (inputValue == usuarioEncontrado.p / 1993) {
-        showId('divNovaSenha', 'block')
+        showId('divNovaSenha', 'flex')
         hideId('login')
         document.getElementById('idNovaSenha').innerText = id
+        document.getElementById('pinNovo').focus()
       } else {
         alert('Senha incorreta')
         e.target.value = ''
@@ -100,7 +109,10 @@ document.getElementById('senhaLogin').addEventListener('input', (e) => {
     }).catch(e => alert(e.message))
   }
 })
- 
+
+
+// PERMITE SOMENTE NUMEROS NO INPUT NOVA SENHA
+
 function onlynumber(evt) {
   var theEvent = evt || window.event;
   var key = theEvent.keyCode || theEvent.which;
@@ -113,6 +125,8 @@ function onlynumber(evt) {
   }
 }
 
+// MUDA O FOCO PARA O SEGUNDO INPUT
+
 document.getElementById('pinNovo').addEventListener('input', e => {
   if(e.target.value.length == 4) {
     document.getElementById('pinNovo1').focus()
@@ -120,6 +134,8 @@ document.getElementById('pinNovo').addEventListener('input', e => {
 } )
 
 var pin1
+
+// COMPARAÇÃO ENTRE NOVA SENHA E REPITA NOVA SENHA
 
 document.getElementById('pinNovo1').addEventListener('input', e => {
   pin1 = document.getElementById('pinNovo').value
@@ -129,18 +145,24 @@ document.getElementById('pinNovo1').addEventListener('input', e => {
       var conf = confirm('Deseja realmente alterar a senha do usuário: '+ id +'?')
       if(conf == true){
         db.ref('usuarios/'+ id.replace(".","_") + "/p").set(pin2 * 1993).then(() => {
-          alert('Senha alterada com sucesso')
+          setTimeout(() => {
+            alert('Senha alterada com sucesso')
+          }, 100);
           reload()
         }).catch(e => alert(e.message))
       } else {
         alert('Alteração de Senha CANCELADA')
         document.getElementById('pinNovo').value=''
         document.getElementById('pinNovo1').value=''
+        document.getElementById('pinNovo').focus()
       }
     } else {
-      alert('Senhas não conferem')
-      document.getElementById('pinNovo').value=''
-      document.getElementById('pinNovo1').value=''
+      setTimeout(() => {
+        alert('Senhas não conferem')
+        document.getElementById('pinNovo').value=''
+        document.getElementById('pinNovo1').value=''
+        document.getElementById('pinNovo').focus()
+      }, 100);
     }
   }
 })

@@ -49,6 +49,7 @@ click('btnAtualizarUsuario', () => {
 						idEncontrado.innerText = usuarioEncontrado.id
 						showId('botoesTagGer', 'inline')
 						hideId('lerMatr')
+						hideId('formAtualizarUsuario')
 						click('trocaGerente', () => {
 							if (usuarioEncontrado.gerente == true) {
 								if (window.confirm('Deseja retirar a credencial de gerente do usuário ' + usuarioEncontrado.id + '?')) {
@@ -110,7 +111,7 @@ click('btnAtualizarUsuario', () => {
 												gerente: gerente,
 												posto: posto,
 											}
-											mensagem = 'Registro: Concedida credencial de Gerente ao empregado ' + usuarioEncontrado.id + ', no posto '+ posto + ' em ' + new Date(momentoRegistro).toLocaleString()
+											mensagem = 'Registro: Concedida credencial de Gerente no Sistema de Controle de TPs ao empregado ' + usuarioEncontrado.id + ', no posto '+ posto + ' em ' + new Date(momentoRegistro).toLocaleString()
 											email = usuarioEncontrado.id + '@metro.df.gov.br'
 											fetchUrl = url + '?mensagem=' + mensagem + '&email=' + email + '&chave=' + chave
 											return db
@@ -134,10 +135,12 @@ click('btnAtualizarUsuario', () => {
 						})
 						click('trocaTag', () => {
 							hideId('botoesTagGer')
-							showId('inputTagAtualiza', 'flex')
+							showId('divTagAtualiza', 'flex')
+							focusTrocaTag()
 							inputTagAtualiza.addEventListener('input', () => {
 								if (inputTagAtualiza.value.length == 10) {
 									var novaTag = inputTagAtualiza.value
+									clearInterval(stopFocusTagAtualiza)
 									db.ref('tps')
 										.once('value')
 										.then(snap => {
@@ -185,6 +188,14 @@ click('btnAtualizarUsuario', () => {
 								}
 							})
 						})
+						click('voltarTag', () => {
+							idEncontrado.innerText = ''
+							document.getElementById('inputMatrAtualiza').value = ''
+							showId('lerMatr', 'flex')
+							hideId('botoesTagGer')
+							document.getElementById('inputMatrAtualiza').focus()
+							showId('formAtualizarUsuario', 'flex')
+						})
 					} else {
 						alert('Matrícula não encontrada')
 					}
@@ -194,6 +205,15 @@ click('btnAtualizarUsuario', () => {
 		}
 	})
 })
+
+const focusTrocaTag = () => {
+	window.stopFocusTagAtualiza = setInterval(() => {
+	if (inputTagAtualiza != document.activeElement) {
+			inputTagAtualiza.focus()
+			console.log('focusTagAtualiza')
+		}
+	}, 100)
+}
 
 function escondeBotoes() {
 	setTimeout(() => {
@@ -207,9 +227,16 @@ click('btnObsTP', () =>{
 	showId("divObsTp", "flex")
 	inputObsNumTP.focus()
 })
+click('btnVoltarObsTp',()=>{
+	showId("inputObsNumTP","flex")
+	hideId("divBotoesObs")
+	inputObsNumTP.focus()
+	inputObsNumTP.value = ""
+
+})
 
 var registroObs = {}
-
+var aparelhoEncontrado ={}
 inputObsNumTP.addEventListener("input",()=>{
 	registroObs['gerente'] = gerente
 	if (inputObsNumTP.value.length == 5){
@@ -222,13 +249,15 @@ inputObsNumTP.addEventListener("input",()=>{
 			return n.tp == tpObs
 			}
 			var tpEncontrado = listaTp.find(numTp)
-			var ultimaData = new Date(tpEncontrado.status.data).toLocaleString()
-			registroObs['ultimo_registro'] = tpEncontrado.status
-			tp = tpEncontrado.tp
-			console.log(registroObs)
+			aparelhoEncontrado = tpEncontrado
 			if (tpEncontrado != undefined) {
+				var ultimaData = new Date(tpEncontrado.status.data).toLocaleString()
+				registroObs['ultimo_registro'] = tpEncontrado.status
+				tp = tpEncontrado.tp
+				console.log(registroObs)
 				document.getElementById("mostraNumTPobs").innerHTML = "TP: "+ tpObs
-				document.getElementById('infoTPobs').innerHTML = `
+				if (tpEncontrado.status.status == 'Em uso'){
+					document.getElementById('infoTPobs').innerHTML = `
 					<p>Patrimônio: ${tpEncontrado.pat}</p>
 					<p>Informações do último registro:</p>
 					<p>Data: ${ultimaData}</p>
@@ -237,19 +266,26 @@ inputObsNumTP.addEventListener("input",()=>{
 					<p>Status: ${tpEncontrado.status.status}</p>
 					<p>Gerente: ${tpEncontrado.status.gerente}</p>
 				`
-				if (tpEncontrado.status.status == 'Em uso'){
 						if (confirm("O TP " + tpEncontrado.tp + " encontra-se registrado para o usuário " + tpEncontrado.status.id + ". Deseja realmente continuar?" )){
 							null
 						} else {
 							reload()
 						}
 				} else if(tpEncontrado.status.status == 'Bloqueado') {
+					document.getElementById('infoTPobs').innerHTML = `
+					<p>Patrimônio: ${tpEncontrado.pat}</p>
+					<p>Informações do último registro:</p>
+					<p>Data: ${ultimaData}</p>
+					<p>Posto: ${tpEncontrado.status.posto}</p>
+					<p>Usuário: ${tpEncontrado.status.id}</p>
+					<p>Status: ${tpEncontrado.status.status}</p>
+					<p>Gerente: ${tpEncontrado.status.gerente}</p>
+				`
 					document.getElementsByName('bloquear')[1].checked = true
 					document.getElementById('opcoesBloquear').style.display = 'none'
 				}
 				hideId('inputObsNumTP')
 				showId('divBotoesObs', 'flex')
-				// parei aqui
 			} else {
 				alert("TP: "+ tpObs + ", não encontrado.")
 				inputObsNumTP.value = ""
@@ -296,6 +332,7 @@ function registrarObs() {
 			}
 			chave = db.ref().child('tps').push().key
 
+			updates['/historico/' + chave] = registro
 			updates['/tps/' + tp + '/status/'] = registro
 			updates['/tps/' + tp + '/obs/' + chave] = registroObs
 
@@ -324,5 +361,9 @@ function registrarObs() {
 
 click('btnEscreverObsTP', () => {
 	showId("divEscreveObs","flex")
+	hideId('divBotoesObs')
+})
+click('btnMostrarObsTP',()=>{
+	showId("divLerObs", "flex")
 	hideId('divBotoesObs')
 })

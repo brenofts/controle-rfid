@@ -30,7 +30,13 @@
 			<button class="botao-principal" id="btnSelecionarPosto">Selecionar</button>
 		</div>
 		<div id="checarGerente">
+			<div id="inputChecarGerente"></div>
 			<div class="lds-ripple"><div></div><div></div></div>
+		</div>
+		<div id="contador">
+			<div></div>
+			<div>Sua sessão expira em </div>
+			<div></div>
 		</div>
 		<div id="principal">
 			<div class="menu" id="opcoes">
@@ -221,7 +227,9 @@
 								<div class="terciario" id="divBotoesObs">
 								<button class="botao-secundario" id="btnMostrarObsTP" title="Clique para VISUALIZAR as observações do aparelho">Mostrar Observações</button>
 								<button class="botao-secundario" id="btnEscreverObsTP" title="Clique para ESCREVER as observações do aparelho">Escrever Observações</button>
+								<button class="botao-secundario" id="btnVoltarObsTp" title="Volte para escolher outro TP">Voltar</button>
 								</div>
+
 								<div class="terciario" id="divEscreveObs">
 									<div id="infoTPobs"></div>
 								<textarea autocomplete="off" width="40vw" height="50vh"  placeholder="Digite aqui a observação a ser Registrada: máximo de 1000 caracteres" id="inputObservacao" maxlength=1000></textarea>
@@ -230,17 +238,13 @@
 									<label>Bloquear TP?</label>
 									<label><input type="radio" name="bloquear" value="sim"> Sim </label>
 									<label><input type="radio" name="bloquear" value="nao"> Não </label>
-									
 								</form>
 								</div>
-								
-								<!-- <select id="bloquearTP">
-								<option value="Bloqueado">Bloquear</option>
-								<option value="Devolvido">Desbloquear</option>
-								</select> -->
 								<button class="botao-secundario" id="escreveObs" title="Clique para efetivar o Registro da Observação">Enviar</button>
 								</div>
 								<div class="terciario" id="divLerObs">
+									<div id="divMostraObs">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -282,16 +286,20 @@
 												<div style="margin-top: 35px;">
 												<div class="hidden" id="divAtualizarUsuario">
 													<legend>Atualizar Usuário</legend>
+													<h2 id='idEncontrado'></h2>
 														<form autocomplete="off" id="formAtualizarUsuario">
-															<h2 id='idEncontrado'></h2>
-																<label for="matricula">Matrícula</label>
 																<input type="text" name="matricula" placeholder="Matrícula" id="inputMatrAtualiza" size=7 maxlength="5"><br>
 																<button class="botao-terciario"  id='lerMatr'>Ir</button>
-																<input  class="input-hidden hidden"  type="password" id="inputTagAtualiza">
 															</form>
+															<div class ="hidden" id="divTagAtualiza">
+																<h2>Aproxime a nova TAG do leitor</h2>
+																<input  class="input-hidden"  type="password" id="inputTagAtualiza">
+																<div class="lds-ripple"><div></div><div></div></div>
+															</div>
 															<div id='botoesTagGer' class='hidden'>
 																<button class="botao-terciario"  id='trocaTag'>TAG</button>
 																<button class="botao-terciario"  id='trocaGerente'>Função</button>
+																<button class="botao-terciario"  id='voltarTag'>Voltar</button>
 															</div>
 									
 														</div>
@@ -302,16 +310,15 @@
 	
 				</div>
 				<div class="secundario" id="senhas">
+					<h1>Senhas</h1>
 					<div>
 						<button class="botao-secundario" id="btnEsqueci" onclick="abrirEsqueci()">Esqueci a senha</button>
 						<button class="botao-secundario" onclick="abrirAtualiza()">Atualizar a senha</button>
 					</div>
 					<div class="pagina" id="esqueciSenha">
-						<div >
 							<h3 id="idEsqueci"></h3>
-							<input autocomplete="off" placeholder="Matrícula" maxlength="5" type="text" id="matriculaEsqueci">
+							<input autocomplete="off" placeholder="Matrícula" size="8" maxlength="5" type="text" id="matriculaEsqueci">
 							<button  class="botao-terciario"  id="btnEnviarEqueci">Enviar e-mail</button>
-						</div>
 					</div>
 					<div class="pagina" id="atualizarSenha">
 						<div id="login">
@@ -319,25 +326,22 @@
 								<legend>Login</legend>
 									<h3 id="idLogin"></h3>
 									<form class="grid" autocomplete="off" id="login">
-											<label for="matricula">Matrícula</label>
 													<input type="text" name="matricula" placeholder="Matrícula" id="matriculaLogin" size=7 maxlength="5">
-											
-											<label for="senha">Senha</label>
-													<input type="password" name="senha" maxlength="4" placeholder="Senha" id="senhaLogin" size="15" width="4" title="Digite a senha com 4 dígitos">
+													<input type="password" name="senha" maxlength="4" placeholder="Senha" id="senhaLogin" size="7" width="4" title="Digite a senha com 4 dígitos">
 									</form>
 							
 						</div>
-						<div class="hidden" id="divNovaSenha" style="margin-top: 35px;">
+						<div class="hidden" id="divNovaSenha">
 							
 								<legend>Nova Senha</legend>
 									<h3 id="idNovaSenha"></h3>
-									<form class="grid" autocomplete="off" id="formNovaSenha">
-											<label for="senha">Nova Senha</label>
-													<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha" maxlength="4" placeholder="Nova Senha" id="pinNovo" size="15" width="4" title="Digite a Nova Senha com 4 dígitos">
-											<label for="senha1">Repita Nova Senha</label>		
-													<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha1" maxlength="4" placeholder="Repita Nova Senha" id="pinNovo1" size="15" width="4" title="Digite novamente a Nova Senha com 4 dígitos">
-													<label for="mostrarSenha">Mostrar Senha</label>
-													<input type="checkbox" onclick="mostrarOcultar()" name="mostraSenha" id="mostraSenha">																	
+									<form autocomplete="off" id="formNovaSenha">
+									
+													<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha" maxlength="4" placeholder="Nova Senha" id="pinNovo" title="Digite a Nova Senha com 4 dígitos">
+												
+													<input type="password" onkeypress="return onlynumber()" inputmode="numeric" name="senha1" maxlength="4" placeholder="Repita Nova Senha" id="pinNovo1" title="Digite novamente a Nova Senha com 4 dígitos">
+													<label for="mostraSenha">	
+													<input type="checkbox" value="value" onclick="mostrarOcultar()" name="mostraSenha" id="mostraSenha">Mostrar Senha</label>																
 									</form>
 							
 						</div>

@@ -47,6 +47,8 @@ inputTagUsuario.addEventListener('input', () => {
 })
 
 function retirar(i, m, t, p) {
+	chave = db.ref().child('historico').push().key
+	
 	// o valor que será atualizado
 	var registro = {
 		status: 'Em uso',
@@ -56,9 +58,9 @@ function retirar(i, m, t, p) {
 		posto: p,
 		gerente: '-',
 		data: new Date().getTime() + diferencaHora,
+		key: chave
 	}
 
-	chave = db.ref().child('historico').push().key
 	// cria uma variável do tipo objeto
 	var updates = {}
 	// cria um item nesse objeto updates[item] = "valor do item"
