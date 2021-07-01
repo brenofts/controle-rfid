@@ -64,7 +64,8 @@ const ids = [
 	'btnVoltarObsTp',
 	'inputChecarGerente',
 	'divTagAtualiza',
-	'contador'
+	'contador',
+	'cancelaTrocaSenha'
 ]
 
 const createVariables = () => {

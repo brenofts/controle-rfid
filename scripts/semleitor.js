@@ -51,6 +51,7 @@ const retirarComSenha = (pepe) => {
   showId('btnRetirarOutro', 'block')
   hideId('utilizarTagRet')
   numTPRetirar.innerText = tp
+  inputMatrRetirar.focus()
 }
 
 const devolverComSenha = (pepe, anthony) => {
@@ -64,6 +65,7 @@ const devolverComSenha = (pepe, anthony) => {
   hideId('utilizarTagDev')
   idTPDevolver.innerText = id
 	numTPDevolver.innerText = tp
+  inputMatrDevolver.focus()
 }
 
 click('btnRetirarOutro', () => {

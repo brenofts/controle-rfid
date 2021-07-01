@@ -441,7 +441,7 @@ input {
 
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto ;
     padding: 10px;
 }
 
@@ -624,4 +624,32 @@ input {
 #divNovaSenha label {
     font-size: 8pt;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
+
+#divFormSenhaDevolver {
+    flex-direction: column;
+}
+#devolver h1, #numTPDevolver {
+    font-size:35pt;
+}
+#idTPDevolver {
+    font-size: 16pt;
+}
+#divFormSenhaDevolver input {
+margin-top:4px;
+}
+#divFormSenhaRetirar {
+    flex-direction: column;
+}
+#formSenhaRetirar {
+    display:flex;
+    flex-direction: column;
+}
+#formSenhaRetirar input {
+    margin-top: 4px;
+}
+#numTPRetirar {
+    font-size: 35pt;
+}
+

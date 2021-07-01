@@ -8,6 +8,7 @@ click('btnSenhas', () => {
 function abrirEsqueci() {
   hideId('atualizarSenha')
   showId('esqueciSenha', 'flex')
+  matriculaEsqueci.focus()
 }
 function abrirAtualiza(){
   showId('atualizarSenha','flex')
@@ -142,20 +143,20 @@ document.getElementById('pinNovo1').addEventListener('input', e => {
   var pin2 = e.target.value
   if (pin2.length == 4) {
     if(pin1 == pin2){
-      var conf = confirm('Deseja realmente alterar a senha do usuário: '+ id +'?')
-      if(conf == true){
-        db.ref('usuarios/'+ id.replace(".","_") + "/p").set(pin2 * 1993).then(() => {
-          setTimeout(() => {
+      setTimeout(() => {
+        var conf = confirm('Deseja realmente alterar a senha do usuário: '+ id +'?')
+        if(conf == true){
+          db.ref('usuarios/'+ id.replace(".","_") + "/p").set(pin2 * 1993).then(() => {
             alert('Senha alterada com sucesso')
-          }, 100);
-          reload()
-        }).catch(e => alert(e.message))
-      } else {
-        alert('Alteração de Senha CANCELADA')
-        document.getElementById('pinNovo').value=''
-        document.getElementById('pinNovo1').value=''
-        document.getElementById('pinNovo').focus()
-      }
+            reload()
+          }).catch(e => alert(e.message))
+        } else {
+          alert('Alteração de Senha CANCELADA')
+          document.getElementById('pinNovo').value=''
+          document.getElementById('pinNovo1').value=''
+          document.getElementById('pinNovo').focus()
+        }
+      }, 100);
     } else {
       setTimeout(() => {
         alert('Senhas não conferem')
@@ -165,4 +166,7 @@ document.getElementById('pinNovo1').addEventListener('input', e => {
       }, 100);
     }
   }
+})
+click("cancelaTrocaSenha",()=>{
+  reload()
 })
