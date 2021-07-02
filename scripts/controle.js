@@ -1,6 +1,7 @@
 click('maisOpc', () => {
 	document.getElementById('btnControle').classList.add('botaoAtivo')
 	clearInterval(stopFocusTP)
+	hideId('rodape')
 	hideId('inicio')
 	showId('opcoes', 'flex')
 	showId('controle', 'flex')

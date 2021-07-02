@@ -58,7 +58,7 @@
 					</div>
 					<button class="botao-principal" id="maisOpc" title="Buscas, Cadastro, Transporte...">Mais opções</button>
 					</div>
-					<div id="grid-inicio" title="Em verde até 2 dias e em vermelho mais de 2 dias">
+					<div id="grid-inicio" title="Em verde até 2 dias, em amarelo de 2 a 3 dias e em vermelho mais de 3 dias">
 						<div id="tpsEmUso" class="grid-container-inicio">
 					</div>
 					</div>
@@ -225,8 +225,8 @@
 								<h3 id="mostraNumTPobs"></h3>
 								<input autocomplete="off" width="100%" size="30" placeholder="Digite aqui o número do TP"  id="inputObsNumTP" title="Digite a numeração completa do TP, com 5 dígitos" maxlength=5>
 								<div class="terciario" id="divBotoesObs">
-								<button class="botao-secundario" id="btnMostrarObsTP" title="Clique para VISUALIZAR as observações do aparelho">Mostrar Observações</button>
-								<button class="botao-secundario" id="btnEscreverObsTP" title="Clique para ESCREVER as observações do aparelho">Escrever Observações</button>
+								<button class="botao-secundario" id="btnDesbloquearTP" title="Clique para DESBLOQUEAR o aparelho sendo necessário escrever o Motivo.">Desbloquear TP</button>
+								<button class="botao-secundario" id="btnEscreverObsTP" title="Clique para ESCREVER as observações do aparelho. Aqui é possível Bloquear o aparelho.">Escrever Observações</button>
 								<button class="botao-secundario" id="btnVoltarObsTp" title="Volte para escolher outro TP">Voltar</button>
 								</div>
 
@@ -297,8 +297,9 @@
 																<div class="lds-ripple"><div></div><div></div></div>
 															</div>
 															<div id='botoesTagGer' class='hidden'>
-																<button class="botao-terciario"  id='trocaTag'>TAG</button>
-																<button class="botao-terciario"  id='trocaGerente'>Função</button>
+																<button class="botao-terciario"  id='desbloqueiaUsuario'title="Use caso usuário esteja impedido de efetuar registros. Ex: empregado perdeu TP; o TP precisa ser bloqueado, com isso não é possível devolve-lo e o usuário fica com o nome impedido de retirar outro TP">Desbloquear Usuário</button>
+																<button class="botao-terciario"  id='trocaTag' title="Use somente caso o Empregado tenha Perdido sua TAG">TAG</button>
+																<button class="botao-terciario"  id='trocaGerente' title="Concede ou Retira credencial de Gerente dentro do sistema controle de TPs" >Função</button>
 																<button class="botao-terciario"  id='voltarTag'>Voltar</button>
 															</div>
 									
@@ -354,6 +355,27 @@
 	
 				</div>
 				</div>
+			</div>
+		</div>
+		<div id="rodape" class="rodape hidden" >
+			<div>TPs com observação: &nbsp;</div>
+			<div id="mostraObsDeTp"></div>
+			<div id="printObs" class="hidden">
+				<!-- <div class="cardObs">
+					<h1 id="tituloObs">50001</h1>
+					<h2 class="dataObs">01-07-2021 09:00:00</h2>
+					<h2 class="gerenteObs">breno.silva</h2>
+					<h2 class="postoObs">FILA-CLA</h2>
+					<p class="obs">Texto da observação Texto da observação Texto da observação Texto da observação Texto da observação Texto da observação</p>
+					<div class="ultimoRegistro">
+					<p>Último registro anterior à observação: </p>
+					<p class="dataUltimo">30-06-2021 09:00:00</p>
+					<p class="statusUltimo">Status: Devolvido</p>
+					<p class="idUltimo">Piloto: julio.nicesio</p>
+					<p class="gerenteUltimo">Gerente: robert.anthony</p>
+					<p class="postoUltimo">Posto: T-PAS</p>
+					</div>
+				</div> -->
 			</div>
 		</div>
 		<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>

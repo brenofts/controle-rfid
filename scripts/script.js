@@ -56,7 +56,6 @@ const ids = [
 	'divObsTp',
 	'inputObsNumTP',
 	'divBotoesObs',
-	'btnMostrarObsTP',
 	'btnEscreverObsTP',
 	'btnMostrarObsTP',
 	'divMostrarObs',
@@ -65,7 +64,12 @@ const ids = [
 	'inputChecarGerente',
 	'divTagAtualiza',
 	'contador',
-	'cancelaTrocaSenha'
+	'cancelaTrocaSenha',
+	'mostraObsDeTp',
+	'rodape',
+	'printObs',
+	'btnDesbloquearTP',
+	'desbloqueiaUsuario'
 ]
 
 const createVariables = () => {

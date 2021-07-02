@@ -522,9 +522,6 @@ input {
     background-color: #173d72c0
 }
 
-.hidden, .pagina {
-    display: none;
-}
 
 .input-hidden {
     opacity: 0;
@@ -637,7 +634,7 @@ input {
     font-size: 16pt;
 }
 #divFormSenhaDevolver input {
-margin-top:4px;
+    margin-top:4px;
 }
 #divFormSenhaRetirar {
     flex-direction: column;
@@ -653,3 +650,41 @@ margin-top:4px;
     font-size: 35pt;
 }
 
+#mostraObsDeTp{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 8pt;
+}
+.rodape{
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 8pt;
+}
+
+.listaObs {
+    margin-right: 4px;
+    margin-bottom:4px;
+    border: 0.1px solid black;
+    background-color: lightblue;
+}
+
+.cardObs {
+    font-family: sans-serif;
+    background-color: white;
+    border: solid 1px black;
+    width: 90%;
+    padding: 20px;
+  }
+  
+.ultimoRegistro {
+    background-color: lightgray;
+    margin: 10px;
+    padding: 15px;
+    font-family: monospace;
+    width: fit-content;
+}
+
+.hidden, .pagina {
+    display: none;
+}

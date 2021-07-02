@@ -363,7 +363,8 @@ click('btnEscreverObsTP', () => {
 	showId("divEscreveObs","flex")
 	hideId('divBotoesObs')
 })
-click('btnMostrarObsTP',()=>{
-	showId("divLerObs", "flex")
-	hideId('divBotoesObs')
+click('btnDesbloquearTP',()=>{
+	// showId("divLerObs", "flex")
+	// hideId('divBotoesObs')
+	alert("desbloqueia")
 })

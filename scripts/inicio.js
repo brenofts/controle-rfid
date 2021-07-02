@@ -184,7 +184,7 @@ const verificarGerente = action => {
 							// setTimeout(()=>{
 							// 	reload() 
 							// },90050)
-							//sessao()
+							sessao()
 							clearInterval(stopFocusVerificarGerente)
 						} else {
 							alert('Operação autorizada somente para gerentes')
@@ -213,7 +213,10 @@ const sessao = () => {
 				reload()
 			}
 		}, 1000);
-	} else {console.log("qualquercoisa diferente de 1")}
+	} else {
+		console.log("qualquercoisa diferente de 1")
+		contador.children[0].innerHTML = `<strong>${gerente}</strong>`
+	}
 }
 
 const showAlert = message => {
@@ -262,7 +265,85 @@ const mostrarTPs = () => {
 				: console.log('TPs em uso:', count)
 			showId('tpsEmUso', 'grid')
 		})
+		mostrarTPsObs()
 	}, 5000)
 }
 
 mostrarTPs()
+
+
+// MOSTRAR TPS COM OBSERVAÇÕES NA TELA INICIAL
+var listaObs = []
+
+function mostrarTPsObs() {
+	db.ref('tps').once('value').then(snap => {
+		var resultado = Object.values(snap.val())
+		var encontrarObs = i => i.obs != undefined
+		var tpsEncontrados = resultado.filter(encontrarObs)
+		tpsEncontrados.length > 0 ? showId('rodape', 'flex') : null
+		tpsEncontrados.map(tp => {
+				var lista = Object.values(tp.obs)
+				var x = {}
+				x['tp'] = tp.tp
+				x['obs'] = lista[lista.length - 1]
+				listaObs.push(x)
+			})
+		listaObs.map(i => mostraObsDeTp.innerHTML += `<div class="listaObs" title="${i.obs.obs}">${i.tp}</div>`)
+		console.log(tpsEncontrados)
+		// HABILITAR IMPRESSÃO DAS OBSERVAÇÕES
+		if(tpsEncontrados.length > 0) {
+		var botoesObs = Array.from(document.querySelectorAll('.listaObs'))
+		botoesObs.map(i => i.addEventListener('click', e => {
+			var numTP = e.target.innerText
+			imprimirObs(numTP)
+		}))
+		}
+		function imprimirObs(numTP) {
+			printObs.innerHTML = ""
+			var encontrarTP = i => i.tp == numTP
+			var tpEncontrado = tpsEncontrados.find(encontrarTP)
+			var lista = Object.values(tpEncontrado.obs)
+			var tituloObs = numTP
+			var titulo = '(' + lista.length + ')' + 'Observações registradas para o TP ' + numTP
+			tituloImpressao = titulo
+			printObs.innerHTML += `<p>${titulo}</p>`
+			lista.map(i => {
+				var dataObs = new Date(i.data).toLocaleString()
+				var gerenteObs = i.gerente
+				var postoObs = i.posto
+				var obs = i.obs
+				var ultimoRegistro = i.ultimo_registro
+				var dataUltimo = new Date(ultimoRegistro.data).toLocaleString()
+				var statusUltimo = ultimoRegistro.status
+				var idUltimo = ultimoRegistro.id
+				var gerenteUltimo = ultimoRegistro.gerente
+				var postoUltimo = ultimoRegistro.posto
+				
+				printObs.innerHTML += `
+				<div class="cardObs">
+				<h1 id="tituloObs">${tituloObs}</h1>
+				<h2 class="dataObs">${dataObs}</h2>
+				<h2 class="gerenteObs">${gerenteObs}</h2>
+				<h2 class="postoObs">${postoObs}</h2>
+				<p class="obs">Observação: ${obs}</p>
+				<div class="ultimoRegistro">
+				<p>Último registro anterior à observação: </p>
+				<p class="dataUltimo">Data: ${dataUltimo}</p>
+				<p class="statusUltimo">Status: ${statusUltimo}</p>
+				<p class="idUltimo">Piloto: ${idUltimo}</p>
+				<p class="gerenteUltimo">Gerente: ${gerenteUltimo}</p>
+				<p class="postoUltimo">Posto: ${postoUltimo}</p>
+				</div>
+			</div>
+				`
+				//showId("printObs","flex")
+
+			})
+			imprimir('printObs')
+		}
+
+	}).catch(e => {
+		alert(e.message)
+		reload()
+	})
+}
